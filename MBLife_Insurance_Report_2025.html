@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MB Life · Báo Cáo Phân Tích Thị Trường Bảo Hiểm 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --pink:       #E8005A;
+  --pink-deep:  #B8004A;
+  --pink-soft:  #FF3D7F;
+  --pink-pale:  #FFE8F0;
+  --pink-ghost: #FFF2F7;
+  --blue:       #1A3A8F;
+  --blue-med:   #2255CC;
+  --blue-light: #4A7FE8;
+  --blue-pale:  #E6EEFF;
+  --blue-ghost: #F0F4FF;
+  --white:      #FFFFFF;
+  --off-white:  #FAFBFF;
+  --gray-1:     #F4F6FA;
+  --gray-2:     #E8EBF3;
+  --gray-3:     #9AA8C4;
+  --text:       #0D1B3E;
+  --text-soft:  #3D4E72;
+  --text-muted: #7A8BAA;
+  --green:      #00C896;
+  --amber:      #F59E0B;
+  --shadow-sm:  0 2px 12px rgba(26,58,143,.08);
+  --shadow-md:  0 8px 32px rgba(26,58,143,.12);
+  --shadow-lg:  0 20px 60px rgba(26,58,143,.16);
+  --r:          14px;
+  --r-lg:       22px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'Lexend',sans-serif;
+  background:var(--off-white);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--gray-1);}
+::-webkit-scrollbar-thumb{background:var(--pink);border-radius:3px;}
+
+/* ─── STICKY NAV ─── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--gray-2);
+  padding:0 5vw;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:var(--shadow-sm);}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-logo{
+  width:40px;height:40px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  box-shadow:0 4px 16px rgba(232,0,90,.3);
+}
+.nav-title{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:700;
+  color:var(--blue);
+}
+.nav-sub{font-size:10px;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;}
+.nav-links{display:flex;gap:4px;}
+.nav-link{
+  padding:7px 14px;border-radius:8px;
+  font-size:12px;font-weight:600;color:var(--text-soft);
+  text-decoration:none;transition:.2s;letter-spacing:.3px;
+  cursor:pointer;border:none;background:transparent;
+}
+.nav-link:hover{background:var(--pink-pale);color:var(--pink);}
+.nav-cta{
+  background:var(--pink);color:white;
+  padding:8px 20px;border-radius:50px;
+  font-size:12px;font-weight:700;letter-spacing:.5px;
+  border:none;cursor:pointer;transition:.2s;
+  box-shadow:0 4px 16px rgba(232,0,90,.3);
+}
+.nav-cta:hover{background:var(--pink-deep);transform:translateY(-1px);}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(232,0,90,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(26,58,143,.08) 0%, transparent 55%),
+    linear-gradient(160deg, #F8FAFF 0%, #FFF5F9 50%, #F0F4FF 100%);
+  padding:120px 5vw 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(232,0,90,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';
+  position:absolute;bottom:-150px;left:-150px;
+  width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(26,58,143,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:white;border:1px solid var(--pink-pale);
+  padding:6px 16px;border-radius:50px;
+  font-size:11px;font-weight:700;color:var(--pink);
+  letter-spacing:1px;text-transform:uppercase;
+  box-shadow:0 2px 12px rgba(232,0,90,.1);
+  margin-bottom:24px;
+}
+.hero-badge span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--pink);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4.5vw,58px);
+  line-height:1.1;
+  color:var(--blue);
+  margin-bottom:20px;
+}
+.hero h1 em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-desc{
+  font-size:15px;line-height:1.8;color:var(--text-soft);
+  font-weight:400;margin-bottom:36px;max-width:480px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{
+  padding:14px 28px;border-radius:50px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+  color:white;font-weight:700;font-size:13px;letter-spacing:.5px;
+  border:none;cursor:pointer;
+  box-shadow:0 8px 24px rgba(232,0,90,.35);
+  transition:.3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,0,90,.45);}
+.btn-outline{
+  padding:14px 28px;border-radius:50px;
+  background:transparent;
+  border:2px solid var(--blue);color:var(--blue);
+  font-weight:700;font-size:13px;letter-spacing:.5px;
+  cursor:pointer;transition:.3s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{background:var(--blue);color:white;transform:translateY(-2px);}
+.hero-right{position:relative;}
+.hero-card-stack{display:flex;flex-direction:column;gap:14px;}
+.hero-kpi{
+  background:white;border-radius:var(--r);
+  padding:20px 24px;
+  box-shadow:var(--shadow-md);
+  border-left:4px solid var(--pink);
+  display:flex;align-items:center;gap:16px;
+  transition:.3s;
+}
+.hero-kpi:hover{transform:translateX(6px);}
+.hero-kpi:nth-child(2){border-left-color:var(--blue);margin-left:24px;}
+.hero-kpi:nth-child(3){border-left-color:var(--green);}
+.hero-kpi:nth-child(4){border-left-color:var(--amber);margin-left:24px;}
+.kpi-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.kpi-icon.pink{background:var(--pink-pale);}
+.kpi-icon.blue{background:var(--blue-pale);}
+.kpi-icon.green{background:rgba(0,200,150,.1);}
+.kpi-icon.amber{background:rgba(245,158,11,.1);}
+.kpi-num{font-size:24px;font-weight:800;color:var(--blue);}
+.kpi-label{font-size:11px;color:var(--text-muted);font-weight:500;margin-top:2px;}
+
+/* ─── SECTION WRAPPER ─── */
+.section{padding:80px 5vw;}
+.section-alt{background:var(--gray-1);}
+.section-pink{background:linear-gradient(160deg,#FFF5F9 0%,#F8FAFF 100%);}
+.section-blue{
+  background:linear-gradient(135deg,var(--blue) 0%,#0D2560 100%);
+  color:white;
+}
+
+.s-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--pink);margin-bottom:12px;
+}
+.s-eyebrow::before{
+  content:'';display:block;
+  width:28px;height:2px;background:var(--pink);border-radius:1px;
+}
+.s-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,3.5vw,40px);
+  font-weight:800;line-height:1.2;
+  color:var(--blue);margin-bottom:10px;
+}
+.s-title.light{color:white;}
+.s-desc{font-size:14px;color:var(--text-soft);line-height:1.8;max-width:600px;}
+.s-desc.light{color:rgba(255,255,255,.7);}
+.s-header{margin-bottom:48px;}
+
+/* ─── DIVIDER ─── */
+.divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--gray-2),transparent);
+  margin:0;
+}
+
+/* ─── MARKET OVERVIEW CARDS ─── */
+.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.market-card{
+  background:white;border-radius:var(--r-lg);
+  padding:28px;box-shadow:var(--shadow-sm);
+  border-top:3px solid transparent;
+  transition:.3s;position:relative;overflow:hidden;
+}
+.market-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--pink),var(--pink-soft));
+  transform:scaleX(0);transform-origin:left;
+  transition:.3s;
+}
+.market-card:hover::before{transform:scaleX(1);}
+.market-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.mc-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:16px;
+}
+.mc-num{
+  font-size:32px;font-weight:800;
+  background:linear-gradient(135deg,var(--blue),var(--blue-med));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.mc-num.pink{
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.mc-label{font-size:12px;font-weight:600;color:var(--text-soft);margin-top:6px;text-transform:uppercase;letter-spacing:.8px;}
+.mc-sub{font-size:12px;color:var(--text-muted);margin-top:4px;line-height:1.5;}
+
+/* ─── PRINCIPLES ─── */
+.principles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.principle-card{
+  background:white;border-radius:var(--r);
+  padding:24px;box-shadow:var(--shadow-sm);
+  display:grid;grid-template-columns:auto 1fr;gap:16px;
+  align-items:start;transition:.3s;
+}
+.principle-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.pc-num{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;color:white;
+  flex-shrink:0;
+}
+.pc-title{font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px;}
+.pc-text{font-size:12px;color:var(--text-soft);line-height:1.65;}
+.pc-example{
+  font-size:11.5px;color:var(--pink);
+  background:var(--pink-ghost);
+  padding:8px 12px;border-radius:8px;
+  margin-top:10px;line-height:1.5;
+  border-left:3px solid var(--pink);
+}
+
+/* ─── CLASSIFICATION TREE ─── */
+.classif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.classif-card{
+  border-radius:var(--r-lg);padding:28px;
+  transition:.3s;
+}
+.classif-card:hover{transform:translateY(-4px);}
+.classif-card.pink{
+  background:linear-gradient(160deg,var(--pink-pale) 0%,var(--pink-ghost) 100%);
+  border:1px solid rgba(232,0,90,.15);
+}
+.classif-card.blue{
+  background:linear-gradient(160deg,var(--blue-pale) 0%,var(--blue-ghost) 100%);
+  border:1px solid rgba(26,58,143,.12);
+}
+.classif-card.mix{
+  background:linear-gradient(160deg,#F0FDF4 0%,#F8FAFF 100%);
+  border:1px solid rgba(0,200,150,.2);
+}
+.cc-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.cc-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.cc-icon.pink{background:rgba(232,0,90,.12);}
+.cc-icon.blue{background:rgba(26,58,143,.1);}
+.cc-icon.green{background:rgba(0,200,150,.1);}
+.cc-title{font-size:15px;font-weight:700;color:var(--blue);}
+.cc-sub{font-size:11px;color:var(--text-muted);letter-spacing:.8px;text-transform:uppercase;}
+.cc-items{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.cc-item{
+  background:white;border-radius:10px;
+  padding:10px 14px;font-size:12px;color:var(--text);font-weight:500;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 1px 4px rgba(0,0,0,.05);
+  transition:.2s;
+}
+.cc-item:hover{background:white;box-shadow:0 3px 12px rgba(0,0,0,.08);}
+.cc-item::before{
+  content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.pink .cc-item::before{background:var(--pink);}
+.blue .cc-item::before{background:var(--blue-med);}
+.mix .cc-item::before{background:var(--green);}
+.cc-item span{font-size:10px;color:var(--text-muted);margin-left:auto;font-weight:400;}
+
+/* ─── COMPARISON TABLE ─── */
+.compare-wrap{overflow-x:auto;border-radius:var(--r-lg);box-shadow:var(--shadow-md);}
+table.compare{width:100%;border-collapse:collapse;font-size:13px;}
+table.compare thead tr{background:linear-gradient(135deg,var(--blue),var(--blue-med));}
+table.compare thead th{
+  padding:16px 18px;text-align:left;
+  color:white;font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:.8px;
+  border-right:1px solid rgba(255,255,255,.1);
+  white-space:nowrap;
+}
+table.compare thead th:first-child{
+  background:linear-gradient(135deg,var(--pink),var(--pink-soft));
+}
+table.compare tbody tr{transition:.2s;}
+table.compare tbody tr:nth-child(odd){background:white;}
+table.compare tbody tr:nth-child(even){background:var(--blue-ghost);}
+table.compare tbody tr:hover{background:var(--pink-ghost);}
+table.compare td{
+  padding:14px 18px;border-bottom:1px solid var(--gray-2);
+  color:var(--text);line-height:1.55;
+  border-right:1px solid var(--gray-2);
+  vertical-align:top;
+}
+table.compare td:first-child{
+  font-weight:700;color:var(--pink);
+  background:rgba(232,0,90,.04);
+}
+
+/* ─── COMPANY CARDS ─── */
+.company-section{padding:80px 5vw;background:white;}
+.company-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.company-card{
+  border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:.3s;border:1px solid var(--gray-2);
+}
+.company-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.cc-top{padding:24px;display:flex;align-items:center;gap:16px;}
+.co-badge{
+  width:56px;height:56px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;font-weight:900;color:white;
+  flex-shrink:0;
+}
+.co-name{font-size:18px;font-weight:700;color:var(--blue);}
+.co-tagline{font-size:11.5px;color:var(--text-muted);font-style:italic;margin-top:2px;}
+.co-badge-right{margin-left:auto;}
+.tag{
+  display:inline-block;padding:4px 12px;border-radius:50px;
+  font-size:10.5px;font-weight:700;letter-spacing:.3px;
+}
+.tag-pink{background:var(--pink-pale);color:var(--pink);}
+.tag-blue{background:var(--blue-pale);color:var(--blue-med);}
+.tag-green{background:rgba(0,200,150,.1);color:#00A87A;}
+.cc-body{padding:0 24px 24px;}
+.cc-body p{font-size:12.5px;color:var(--text-soft);line-height:1.7;margin-bottom:14px;}
+.cc-items-row{display:flex;flex-wrap:wrap;gap:8px;}
+.cc-item-tag{
+  background:var(--gray-1);border-radius:8px;
+  padding:6px 12px;font-size:11px;color:var(--text-soft);font-weight:500;
+}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.bar-lbl{font-size:11.5px;color:var(--text-muted);width:120px;flex-shrink:0;}
+.bar-track{flex:1;height:5px;background:var(--gray-2);border-radius:3px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;}
+.bar-val{font-size:11px;font-weight:700;color:var(--blue);width:30px;text-align:right;}
+
+/* ─── HEATMAP ─── */
+.heatmap-section{padding:80px 5vw;background:var(--gray-1);}
+.heatmap-wrap{overflow-x:auto;border-radius:var(--r-lg);box-shadow:var(--shadow-md);}
+table.hm{width:100%;border-collapse:collapse;}
+table.hm th{
+  padding:12px 14px;
+  background:var(--blue);color:white;
+  font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+  white-space:nowrap;border:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+table.hm th.row-h{background:linear-gradient(135deg,var(--pink),var(--pink-deep));}
+table.hm td{
+  padding:12px 14px;border:1px solid var(--gray-2);
+  text-align:center;font-weight:700;font-size:12px;
+  transition:.2s;cursor:default;
+}
+table.hm td.rl{
+  text-align:left;font-weight:700;color:white;
+  padding-left:16px;font-size:13px;
+}
+table.hm td:hover:not(.rl){filter:brightness(0.93);}
+.h5{background:#BCFCE4;color:#065F46;}
+.h4{background:#D1FAE5;color:#065F46;}
+.h3{background:#FEF3C7;color:#92400E;}
+.h2{background:#FEE2E2;color:#991B1B;}
+.h1{background:#F3F4F6;color:#6B7280;}
+.co-manulife{background:linear-gradient(90deg,#00B04F,#008A3D);} 
+.co-generali{background:linear-gradient(90deg,#C8102E,#A00D25);}
+.co-chubb{background:linear-gradient(90deg,#1A3A5C,#0F2340);}
+.co-aia{background:linear-gradient(90deg,#E63946,#B8202C);}
+.co-mb{background:linear-gradient(90deg,var(--pink),var(--pink-deep));}
+.hm-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
+.hm-legend-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;color:var(--text-soft);
+}
+.hm-dot{width:14px;height:14px;border-radius:4px;}
+
+/* ─── MB LIFE SPOTLIGHT ─── */
+.mblife-hero{
+  background:linear-gradient(135deg,var(--blue) 0%,#0D2560 40%,var(--pink-deep) 100%);
+  padding:80px 5vw;
+  position:relative;overflow:hidden;
+  color:white;
+}
+.mblife-hero::before{
+  content:'';
+  position:absolute;top:-100px;right:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,0,90,.15) 0%,transparent 70%);
+}
+.mblife-hero::after{
+  content:'';
+  position:absolute;bottom:-100px;left:30%;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%);
+}
+.mblife-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;}
+.mb-title-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,61,127,.8);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.mb-title-eyebrow::before{content:'';width:20px;height:2px;background:var(--pink-soft);border-radius:1px;}
+.mb-heading{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);line-height:1.15;color:white;margin-bottom:16px;}
+.mb-desc{font-size:14px;color:rgba(255,255,255,.75);line-height:1.8;margin-bottom:28px;}
+.mb-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mb-stat{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:14px;padding:18px;
+}
+.mb-stat-num{font-size:26px;font-weight:800;color:white;}
+.mb-stat-num.pink{
+  background:linear-gradient(135deg,var(--pink-soft),#FF8AB5);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.mb-stat-lbl{font-size:11px;color:rgba(255,255,255,.6);margin-top:3px;}
+.mb-right{display:flex;flex-direction:column;gap:14px;}
+.mb-feature{
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:20px;
+  display:grid;grid-template-columns:auto 1fr;gap:14px;
+  align-items:start;transition:.3s;
+}
+.mb-feature:hover{background:rgba(255,255,255,.12);transform:translateX(4px);}
+.mb-feature-icon{
+  width:44px;height:44px;border-radius:11px;
+  background:linear-gradient(135deg,rgba(232,0,90,.3),rgba(232,0,90,.15));
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  flex-shrink:0;
+}
+.mb-feature-title{font-size:13px;font-weight:700;color:white;margin-bottom:4px;}
+.mb-feature-text{font-size:12px;color:rgba(255,255,255,.65);line-height:1.55;}
+
+/* ─── SWOT ─── */
+.swot-section{padding:80px 5vw;background:white;}
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.swot-card{border-radius:var(--r-lg);padding:28px;position:relative;overflow:hidden;}
+.swot-card.s{background:linear-gradient(160deg,#FFF5F9,#FFE8F0);border:1px solid rgba(232,0,90,.15);}
+.swot-card.w{background:linear-gradient(160deg,var(--blue-ghost),var(--blue-pale));border:1px solid rgba(26,58,143,.1);}
+.swot-card.o{background:linear-gradient(160deg,#F0FDF9,#ECFDF5);border:1px solid rgba(0,200,150,.2);}
+.swot-card.t{background:linear-gradient(160deg,#FFFBEB,#FEF3C7);border:1px solid rgba(245,158,11,.2);}
+.swot-corner{
+  position:absolute;top:20px;right:20px;
+  font-size:48px;opacity:.08;font-family:'Playfair Display',serif;font-weight:800;
+}
+.swot-label{
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.swot-card.s .swot-label{color:var(--pink);}
+.swot-card.w .swot-label{color:var(--blue-med);}
+.swot-card.o .swot-label{color:#059669;}
+.swot-card.t .swot-label{color:#D97706;}
+.swot-title{font-size:18px;font-weight:700;color:var(--blue);margin-bottom:16px;}
+.swot-items{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.swot-item{
+  font-size:12.5px;color:var(--text-soft);line-height:1.5;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.swot-item::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  flex-shrink:0;margin-top:6px;
+}
+.s .swot-item::before{background:var(--pink);}
+.w .swot-item::before{background:var(--blue-med);}
+.o .swot-item::before{background:#059669;}
+.t .swot-item::before{background:#D97706;}
+
+/* ─── PERSONAS ─── */
+.persona-section{padding:80px 5vw;background:var(--gray-1);}
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.persona-card{
+  background:white;border-radius:var(--r-lg);
+  padding:24px;box-shadow:var(--shadow-sm);
+  transition:.3s;
+}
+.persona-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.persona-avatar{
+  width:56px;height:56px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin-bottom:16px;
+}
+.persona-name{font-size:14px;font-weight:700;color:var(--blue);margin-bottom:4px;}
+.persona-profile{font-size:11.5px;color:var(--text-muted);margin-bottom:12px;}
+.persona-need{
+  background:var(--pink-ghost);border-left:3px solid var(--pink);
+  padding:10px 12px;border-radius:0 8px 8px 0;
+  font-size:12px;color:var(--text-soft);line-height:1.55;margin-bottom:12px;
+}
+.persona-hook{
+  background:var(--blue-ghost);border-left:3px solid var(--blue);
+  padding:10px 12px;border-radius:0 8px 8px 0;
+  font-size:11.5px;color:var(--blue);line-height:1.55;
+  font-style:italic;
+}
+
+/* ─── GLOSSARY ─── */
+.glossary-section{padding:80px 5vw;background:white;}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.glossary-item{
+  background:var(--gray-1);border-radius:var(--r);
+  padding:20px;border:1px solid var(--gray-2);
+  transition:.3s;
+}
+.glossary-item:hover{border-color:var(--pink);background:var(--pink-ghost);transform:translateX(4px);}
+.gl-term{font-size:13px;font-weight:700;color:var(--pink);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.gl-law{font-size:10px;background:var(--blue-pale);color:var(--blue-med);padding:2px 8px;border-radius:4px;font-weight:600;}
+.gl-def{font-size:12.5px;color:var(--text-soft);line-height:1.65;margin-bottom:8px;}
+.gl-ex{font-size:11.5px;color:var(--text-muted);font-style:italic;}
+
+/* ─── FOOTER ─── */
+.footer{
+  background:linear-gradient(135deg,var(--blue) 0%,#0D2560 100%);
+  padding:60px 5vw 36px;
+  color:white;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+.footer-brand .nav-logo{margin-bottom:16px;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;max-width:280px;}
+.footer-col h4{font-size:13px;font-weight:700;color:white;margin-bottom:14px;letter-spacing:.5px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.footer-col li{font-size:12.5px;color:rgba(255,255,255,.55);cursor:pointer;transition:.2s;}
+.footer-col li:hover{color:var(--pink-soft);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-bottom p{font-size:11.5px;color:rgba(255,255,255,.4);}
+.footer-tags{display:flex;gap:8px;}
+.footer-tag{
+  padding:4px 12px;border-radius:50px;
+  border:1px solid rgba(255,255,255,.15);
+  font-size:10.5px;color:rgba(255,255,255,.5);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:none;}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:none;}}
+.anim-1{animation:fadeUp .7s .1s both;}
+.anim-2{animation:fadeUp .7s .25s both;}
+.anim-3{animation:fadeUp .7s .4s both;}
+.anim-4{animation:fadeUp .7s .55s both;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:100px 5vw 60px;}
+  .hero-right{display:none;}
+  .market-grid,.classif-grid,.company-grid,.swot-grid,.persona-grid{grid-template-columns:1fr;}
+  .persona-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .mblife-grid{grid-template-columns:1fr;}
+  .mb-stats{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+  .glossary-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .persona-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .mb-stats{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">🛡</div>
+    <div>
+      <div class="nav-title">MB Life · Insurance Report</div>
+      <div class="nav-sub">Phân Tích Thị Trường 2025</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="scrollTo('market')">Thị Trường</button>
+    <button class="nav-link" onclick="scrollTo('classify')">Phân Loại</button>
+    <button class="nav-link" onclick="scrollTo('companies')">Đối Thủ</button>
+    <button class="nav-link" onclick="scrollTo('mblife')">MB Life</button>
+    <button class="nav-link" onclick="scrollTo('glossary')">Thuật Ngữ</button>
+  </div>
+  <button class="nav-cta" onclick="scrollTo('mblife')">🏦 MB Life Focus →</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div>
+    <div class="hero-badge"><span></span>Research Report · Updated T8/2025</div>
+    <h1 class="anim-1">Toàn Cảnh Thị Trường<br><em>Bảo Hiểm Việt Nam</em><br>2025</h1>
+    <p class="hero-desc anim-2">Báo cáo phân tích chuyên sâu cho MB Life — tổng hợp từ Luật KDBH 2022, Giáo trình ĐLBH Cơ Bản 2024 và dữ liệu thực tế từ website 5 công ty lớn nhất thị trường.</p>
+    <div class="hero-actions anim-3">
+      <a class="btn-primary" onclick="scrollTo('market')">📊 Xem Phân Tích →</a>
+      <a class="btn-outline" onclick="scrollTo('mblife')">🏦 MB Life Spotlight</a>
+    </div>
+  </div>
+  <div class="hero-right anim-4">
+    <div class="hero-card-stack">
+      <div class="hero-kpi"><div class="kpi-icon pink">📉</div><div><div class="kpi-num">–5%</div><div class="kpi-label">Tăng trưởng BHNT 2024 · Năm 2 liên tiếp âm</div></div></div>
+      <div class="hero-kpi"><div class="kpi-icon blue">🏦</div><div><div class="kpi-num">Top 6</div><div class="kpi-label">MB Life xếp hạng khai thác mới H1/2025</div></div></div>
+      <div class="hero-kpi"><div class="kpi-icon green">📈</div><div><div class="kpi-num">+48%</div><div class="kpi-label">Doanh thu MB Life H1/2025 vs cùng kỳ 2024</div></div></div>
+      <div class="hero-kpi"><div class="kpi-icon amber">⚖️</div><div><div class="kpi-num">01/07</div><div class="kpi-label">Toàn ngành tái cơ cấu SP theo Luật KDBH 2022</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARKET OVERVIEW ─── -->
+<section class="section" id="market">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Tổng Quan Thị Trường</div>
+    <h2 class="s-title">Thị Trường Bảo Hiểm VN<br>Đang Ở Giai Đoạn Tái Cấu Trúc</h2>
+    <p class="s-desc">Sau 2 năm tăng trưởng âm (2023–2024), thị trường BHNT bắt đầu phục hồi với làn sóng sản phẩm mới tuân thủ Luật KDBH 2022. Phi nhân thọ tăng mạnh +10.2%.</p>
+  </div>
+  <div class="market-grid reveal">
+    <div class="market-card"><div class="mc-icon" style="background:var(--pink-pale);">🏢</div><div class="mc-num">~60</div><div class="mc-label">DNBH hoạt động tại VN</div><div class="mc-sub">18 nhân thọ · 30+ phi nhân thọ · SK chuyên biệt</div></div>
+    <div class="market-card"><div class="mc-icon" style="background:var(--blue-pale);">📊</div><div class="mc-num">227.5K</div><div class="mc-label">Tỷ đồng phí BH toàn thị trường 2024</div><div class="mc-sub">Tăng nhẹ 0% so với năm trước</div></div>
+    <div class="market-card"><div class="mc-icon" style="background:rgba(0,200,150,.1);">💰</div><div class="mc-num pink">93.9K</div><div class="mc-label">Tỷ đồng chi trả quyền lợi BH 2024</div><div class="mc-sub">Tăng +15.7% · BHNT tăng mạnh +25%</div></div>
+    <div class="market-card"><div class="mc-icon" style="background:rgba(245,158,11,.1);">🔄</div><div class="mc-num">01/07</div><div class="mc-label">Deadline tái cơ cấu toàn bộ sản phẩm</div><div class="mc-sub">Tất cả DNBH phải tuân thủ Luật 2022</div></div>
+    <div class="market-card"><div class="mc-icon" style="background:var(--pink-pale);">📱</div><div class="mc-num pink">Digital</div><div class="mc-label">Xu hướng số hóa toàn ngành 2025</div><div class="mc-sub">App BH · Claim online · e-Policy phổ biến</div></div>
+    <div class="market-card"><div class="mc-icon" style="background:var(--blue-pale);">❤️</div><div class="mc-num">Health</div><div class="mc-label">Sức khỏe dẫn đầu nhu cầu mới</div><div class="mc-sub">Post-COVID · CI · Wellness ecosystem bùng nổ</div></div>
+  </div>
+
+  <div class="divider" style="margin:60px 0 48px;"></div>
+
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Nguyên Tắc Pháp Lý</div>
+    <h2 class="s-title">5 Nguyên Tắc Bảo Hiểm<br>Theo Luật KDBH 2022</h2>
+  </div>
+  <div class="principles-grid reveal">
+    <div class="principle-card">
+      <div class="pc-num">1</div>
+      <div><div class="pc-title">Trung Thực Tuyệt Đối</div><div class="pc-text">Cả 2 bên khai báo đầy đủ, trung thực khi ký HĐBH. Gian lận → vô hiệu hợp đồng theo Điều 16 Luật 2022.</div><div class="pc-example">📌 Giấu bệnh tiểu đường khi mua BH → DNBH từ chối trả CI sau 3 năm. Áp dụng mọi loại BH.</div></div>
+    </div>
+    <div class="principle-card">
+      <div class="pc-num">2</div>
+      <div><div class="pc-title">Quyền Lợi Có Thể Được BH</div><div class="pc-text">BMBH phải có lợi ích kinh tế hợp pháp với NĐBH. Ngăn mua BH để "đặt cược" tính mạng người khác.</div><div class="pc-example">📌 Mua BH tử vong cho người lạ → vi phạm. Cha, mẹ, vợ, chồng, con = hợp lệ.</div></div>
+    </div>
+    <div class="principle-card">
+      <div class="pc-num">3</div>
+      <div><div class="pc-title">Nguyên Tắc Bồi Thường</div><div class="pc-text">Bồi thường ≤ thiệt hại thực tế. KHÔNG áp dụng cho BH con người (dùng nguyên tắc khoán thay thế).</div><div class="pc-example">📌 Nhà cháy thiệt hại 400tr, STBH 500tr → BH chỉ trả tối đa 400tr. Áp dụng BH PNT.</div></div>
+    </div>
+    <div class="principle-card">
+      <div class="pc-num">4</div>
+      <div><div class="pc-title">Nguyên Tắc Thế Quyền</div><div class="pc-text">Sau bồi thường, DNBH thay thế NĐBH để đòi người thứ 3 có lỗi. KHÔNG áp dụng BHNT và SK.</div><div class="pc-example">📌 Xe bị người khác đâm, BH bồi thường → BH kiện người gây tai nạn thay KH. PNT/TNDS.</div></div>
+    </div>
+    <div class="principle-card">
+      <div class="pc-num">5</div>
+      <div><div class="pc-title">Rủi Ro Ngẫu Nhiên</div><div class="pc-text">Sự kiện BH phải bất ngờ, không lường trước. Hao mòn, cố ý, chắc chắn xảy ra → không được BH.</div><div class="pc-example">📌 Xe hỏng do hao mòn tự nhiên → không BH. Tự tử trong 2 năm đầu → loại trừ tuyệt đối.</div></div>
+    </div>
+    <div class="principle-card">
+      <div class="pc-num" style="background:linear-gradient(135deg,var(--blue),var(--blue-med));">+</div>
+      <div><div class="pc-title">Nguyên Tắc Khoán (BH Con Người)</div><div class="pc-text">Trả theo STBH đã thỏa thuận trong HĐBH, không phụ thuộc thiệt hại thực tế. Tính mạng con người là vô giá.</div><div class="pc-example">📌 BHNT tử vong STBH 2 tỷ → người TH nhận đúng 2 tỷ dù KH đang nợ hay có nhiều tài sản.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLASSIFICATION ─── -->
+<section class="section section-alt" id="classify">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Phân Loại Bảo Hiểm</div>
+    <h2 class="s-title">Cây Nghiệp Vụ Theo<br>Luật KDBH 2022</h2>
+    <p class="s-desc">3 loại hình chính — mỗi loại có kỹ thuật quản lý, nguyên tắc bồi thường và tệp khách hàng khác nhau hoàn toàn.</p>
+  </div>
+  <div class="classif-grid reveal">
+    <div class="classif-card pink">
+      <div class="cc-header"><div class="cc-icon pink">🛡</div><div><div class="cc-title">Bảo Hiểm Nhân Thọ</div><div class="cc-sub">7 nghiệp vụ · Kỹ thuật tồn tích</div></div></div>
+      <ul class="cc-items">
+        <li class="cc-item">Bảo hiểm Tử Kỳ (Term Life) <span>Phí thấp nhất</span></li>
+        <li class="cc-item">Bảo hiểm Sinh Kỳ <span>Tích lũy mục tiêu</span></li>
+        <li class="cc-item">Bảo hiểm Hỗn Hợp (Endowment) <span>Phổ biến nhất</span></li>
+        <li class="cc-item">Bảo hiểm Trọn Đời (Whole Life) <span>Di sản</span></li>
+        <li class="cc-item">Liên Kết Chung (UL) <span>Lãi cam kết</span></li>
+        <li class="cc-item">Liên Kết Đơn Vị (ILP/VUL) <span>KH chịu RR</span></li>
+        <li class="cc-item">Bảo hiểm Hưu Trí (Annuity) <span>Niên kim</span></li>
+      </ul>
+    </div>
+    <div class="classif-card blue">
+      <div class="cc-header"><div class="cc-icon blue">⚕️</div><div><div class="cc-title">Bảo Hiểm Sức Khỏe</div><div class="cc-sub">4 nghiệp vụ · Kỹ thuật phân chia</div></div></div>
+      <ul class="cc-items">
+        <li class="cc-item">BH Sức Khỏe / Thân Thể <span>Tái tục hàng năm</span></li>
+        <li class="cc-item">BH Chi Phí Y Tế (Viện phí) <span>Hoàn trả HĐ</span></li>
+        <li class="cc-item">BH Tai Nạn Cá Nhân <span>Phí rất thấp</span></li>
+        <li class="cc-item">BH Bệnh Hiểm Nghèo (CI) <span>Trả 1 lần</span></li>
+      </ul>
+      <div style="margin-top:16px;padding:12px;background:rgba(26,58,143,.06);border-radius:10px;">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:6px;">⚠️ Điểm Quan Trọng</div>
+        <div style="font-size:11.5px;color:var(--text-soft);">Luật 2022 tách DNBH SK thành pháp nhân riêng biệt, không được kinh doanh chéo với BHNT hay PNT.</div>
+      </div>
+    </div>
+    <div class="classif-card mix">
+      <div class="cc-header"><div class="cc-icon green">🏗</div><div><div class="cc-title">Bảo Hiểm Phi Nhân Thọ</div><div class="cc-sub">11 nghiệp vụ · Phân chia + Bắt buộc</div></div></div>
+      <ul class="cc-items">
+        <li class="cc-item">BH Tài sản / BH Hàng hóa <span>NT bồi thường</span></li>
+        <li class="cc-item">BH Xe cơ giới <span>TNDS bắt buộc</span></li>
+        <li class="cc-item">BH Cháy, nổ <span>1 phần bắt buộc</span></li>
+        <li class="cc-item">BH Trách nhiệm dân sự <span>7 loại</span></li>
+        <li class="cc-item">BH Thân tàu / Hàng không <span>Quốc tế</span></li>
+        <li class="cc-item">BH Nông nghiệp <span>Nhà nước hỗ trợ</span></li>
+        <li class="cc-item">BH Tín dụng / Bảo lãnh <span>SME, NH</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:48px;" class="reveal">
+    <div style="margin-bottom:20px;"><div class="s-eyebrow">So Sánh Trực Tiếp</div><h3 style="font-size:20px;font-weight:700;color:var(--blue);font-family:'Playfair Display',serif;">BHNT vs BH SK vs BH Phi NT — Điểm Khác Biệt Cốt Lõi</h3></div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead><tr><th>Tiêu Chí</th><th>BH Nhân Thọ</th><th>BH Sức Khỏe</th><th>BH Phi Nhân Thọ</th></tr></thead>
+        <tbody>
+          <tr><td>Kỹ thuật quản lý</td><td>Tồn tích — dài hạn 10-30 năm, dự phòng toán học</td><td>Phân chia — tái tục ≤1 năm</td><td>Phân chia — ngắn hạn</td></tr>
+          <tr><td>Nguyên tắc bồi thường</td><td>KHOÁN — trả STBH đã thỏa thuận, không phụ thuộc thiệt hại</td><td>Khoán (CI, tai nạn) hoặc bồi thường (viện phí)</td><td>BỒI THƯỜNG — tối đa bằng thiệt hại thực tế</td></tr>
+          <tr><td>Nguyên tắc thế quyền</td><td>❌ Không áp dụng</td><td>❌ Không áp dụng</td><td>✅ Áp dụng sau bồi thường</td></tr>
+          <tr><td>Giá trị hoàn lại</td><td>Có (hỗn hợp, LKC, ILP)</td><td>Không</td><td>Không</td></tr>
+          <tr><td>DNBH được phép</td><td>Chỉ DNBH Nhân Thọ</td><td>DNBH SK chuyên biệt (Luật 2022)</td><td>Chỉ DNBH Phi nhân thọ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPANY COMPARISON ─── -->
+<section class="company-section" id="companies">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Khảo Sát Đối Thủ</div>
+    <h2 class="s-title">4 Đối Thủ Cạnh Tranh<br>Chính Trên Thị Trường</h2>
+    <p class="s-desc">Dữ liệu xác minh từ website chính thức + tin tức tháng 7–8/2025. Tất cả đã tái cơ cấu sản phẩm sau deadline 01/07/2025.</p>
+  </div>
+  <div class="company-grid reveal">
+    <!-- Manulife -->
+    <div class="company-card">
+      <div class="cc-top"><div class="co-badge" style="background:linear-gradient(135deg,#00B04F,#007A36);">M</div><div><div class="co-name">Manulife Việt Nam</div><div class="co-tagline">"Decisions Made Easier, Lives Made Better"</div></div><div class="co-badge-right"><span class="tag tag-green">Top 3 Thị Phần</span></div></div>
+      <div class="cc-body">
+        <p><strong>Vốn điều lệ 22.220 tỷ VNĐ</strong> — lớn nhất thị trường. Chi trả 7.884 tỷ quyền lợi BH năm 2024. Mạng lưới đại lý lớn nhất và đào tạo tư vấn tài chính chuyên nghiệp nhất.</p>
+        <div style="margin-bottom:14px;">
+          <div class="bar-row"><div class="bar-lbl">Mạng lưới đại lý</div><div class="bar-track"><div class="bar-fill" style="width:92%;background:linear-gradient(90deg,#00B04F,#00d95f);"></div></div><div class="bar-val">92</div></div>
+          <div class="bar-row"><div class="bar-lbl">Nhận diện thương hiệu</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:linear-gradient(90deg,var(--blue),var(--blue-light));"></div></div><div class="bar-val">88</div></div>
+          <div class="bar-row"><div class="bar-lbl">Digital tools</div><div class="bar-track"><div class="bar-fill" style="width:82%;background:linear-gradient(90deg,var(--pink),var(--pink-soft));"></div></div><div class="bar-val">82</div></div>
+        </div>
+        <div class="cc-items-row">
+          <span class="cc-item-tag">📈 BH Liên Kết ĐT</span><span class="cc-item-tag">🛡 Rider Suite 20+</span><span class="cc-item-tag">📊 Quỹ Mở Manulife</span><span class="cc-item-tag">💻 App M-Pro</span>
+        </div>
+      </div>
+    </div>
+    <!-- Generali -->
+    <div class="company-card">
+      <div class="cc-top"><div class="co-badge" style="background:linear-gradient(135deg,#C8102E,#8B0000);">G</div><div><div class="co-name">Generali Việt Nam</div><div class="co-tagline">"Người Bạn Đồng Hành Trọn Đời"</div></div><div class="co-badge-right"><span class="tag tag-pink">Lifestyle Leader</span></div></div>
+      <div class="cc-body">
+        <p>Dòng <strong>VITA thế hệ mới</strong> (2024-2025) — VITA Đầu Tư Thịnh Vượng (ILP) + VITA Ngày Mai Vững Chắc (LKC). <strong>111 bệnh CI</strong> — nhiều nhất thị trường. Ecosystem GENVITA app tích hợp wellness.</p>
+        <div style="margin-bottom:14px;">
+          <div class="bar-row"><div class="bar-lbl">Health ecosystem</div><div class="bar-track"><div class="bar-fill" style="width:92%;background:linear-gradient(90deg,#C8102E,#e53e3e);"></div></div><div class="bar-val">92</div></div>
+          <div class="bar-row"><div class="bar-lbl">111 bệnh CI</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,var(--green),#34d399);"></div></div><div class="bar-val">90</div></div>
+          <div class="bar-row"><div class="bar-lbl">GENVITA app</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,var(--blue),var(--blue-light));"></div></div><div class="bar-val">85</div></div>
+        </div>
+        <div class="cc-items-row">
+          <span class="cc-item-tag">🔴 VITA Đầu Tư Thịnh Vượng</span><span class="cc-item-tag">❤️ VITA Ngày Mai Vững Chắc</span><span class="cc-item-tag">🏥 BH SK Cá Nhân</span><span class="cc-item-tag">📱 GENVITA</span>
+        </div>
+      </div>
+    </div>
+    <!-- Chubb Life -->
+    <div class="company-card">
+      <div class="cc-top"><div class="co-badge" style="background:linear-gradient(135deg,#1A3A5C,#2563EB);">C</div><div><div class="co-name">Chubb Life Việt Nam</div><div class="co-tagline">"Trusted. Committed. Ready."</div></div><div class="co-badge-right"><span class="tag tag-blue">Premium HNW</span></div></div>
+      <div class="cc-body">
+        <p>Dòng <strong>Tự Do</strong> thế hệ mới (post-01/07/2025) — Tự Do An Phúc (LKC) + Tự Do An Phát (ILP). Định vị premium, Fortune 500. Lịch sử lãi suất công bố minh bạch từ 2008.</p>
+        <div style="margin-bottom:14px;">
+          <div class="bar-row"><div class="bar-lbl">Uy tín Fortune 500</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:linear-gradient(90deg,#1A3A5C,#2563EB);"></div></div><div class="bar-val">95</div></div>
+          <div class="bar-row"><div class="bar-lbl">Wealth management</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,var(--amber),#fbbf24);"></div></div><div class="bar-val">90</div></div>
+          <div class="bar-row"><div class="bar-lbl">Claim service</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:linear-gradient(90deg,var(--green),#34d399);"></div></div><div class="bar-val">88</div></div>
+        </div>
+        <div class="cc-items-row">
+          <span class="cc-item-tag">🔵 Tự Do An Phúc (LKC)</span><span class="cc-item-tag">💎 Tự Do An Phát (ILP)</span><span class="cc-item-tag">🏥 Chubb Care</span><span class="cc-item-tag">📊 Lãi suất từ 2008</span>
+        </div>
+      </div>
+    </div>
+    <!-- AIA -->
+    <div class="company-card">
+      <div class="cc-top"><div class="co-badge" style="background:linear-gradient(135deg,#E63946,#C1121F);">A</div><div><div class="co-name">AIA Việt Nam</div><div class="co-tagline">"Healthier, Longer, Better Lives"</div></div><div class="co-badge-right"><span class="tag tag-pink">Health Leader</span></div></div>
+      <div class="cc-body">
+        <p>Giải <strong>Rồng Vàng lần 11</strong> "DNBH NT dẫn đầu sản phẩm sống khỏe". Ra 4 SP mới T7-T8/2025. <strong>AIA Vitality</strong> — độc nhất thị trường: giảm phí BH khi bạn sống khỏe. Tổng tài sản 67.557 tỷ.</p>
+        <div style="margin-bottom:14px;">
+          <div class="bar-row"><div class="bar-lbl">Health ecosystem</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:linear-gradient(90deg,#E63946,#f472b6);"></div></div><div class="bar-val">95</div></div>
+          <div class="bar-row"><div class="bar-lbl">AIA Vitality (unique)</div><div class="bar-track"><div class="bar-fill" style="width:93%;background:linear-gradient(90deg,var(--green),#34d399);"></div></div><div class="bar-val">93</div></div>
+          <div class="bar-row"><div class="bar-lbl">Gen Z appeal</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:linear-gradient(90deg,var(--blue),var(--blue-light));"></div></div><div class="bar-val">90</div></div>
+        </div>
+        <div class="cc-items-row">
+          <span class="cc-item-tag">❤️ AIA Khỏe Bình An (mới T8)</span><span class="cc-item-tag">👨‍👩‍👧 Bùng Gia Lực</span><span class="cc-item-tag">💚 AIA Vitality</span><span class="cc-item-tag">🤖 Digital Health DHS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HEATMAP ─── -->
+<section class="heatmap-section">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Heatmap Cạnh Tranh</div>
+    <h2 class="s-title">Công Ty × Phân Khúc Khách Hàng</h2>
+    <p class="s-desc">Đánh giá từ 1–5 dựa trên phân tích sản phẩm + chiến lược truyền thông + dữ liệu website thực tế.</p>
+  </div>
+  <div class="heatmap-wrap reveal">
+    <table class="hm">
+      <thead>
+        <tr>
+          <th class="row-h">Công Ty</th>
+          <th>GĐ Trẻ</th><th>Trụ Cột GĐ</th><th>Đầu Tư</th><th>Sức Khỏe</th>
+          <th>Wealth/HNW</th><th>Gen Z</th><th>Hưu Trí</th><th>Digital</th>
+          <th>Tư Vấn TC</th><th>SME/DN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rl co-manulife">Manulife</td>
+          <td class="h4">4</td><td class="h5">5</td><td class="h4">4</td><td class="h3">3</td>
+          <td class="h3">3</td><td class="h3">3</td><td class="h3">3</td><td class="h4">4</td>
+          <td class="h5">5</td><td class="h3">3</td>
+        </tr>
+        <tr>
+          <td class="rl co-generali">Generali</td>
+          <td class="h5">5</td><td class="h4">4</td><td class="h3">3</td><td class="h5">5</td>
+          <td class="h3">3</td><td class="h4">4</td><td class="h4">4</td><td class="h5">5</td>
+          <td class="h3">3</td><td class="h2">2</td>
+        </tr>
+        <tr>
+          <td class="rl co-chubb">Chubb Life</td>
+          <td class="h2">2</td><td class="h3">3</td><td class="h4">4</td><td class="h4">4</td>
+          <td class="h5">5</td><td class="h2">2</td><td class="h3">3</td><td class="h3">3</td>
+          <td class="h4">4</td><td class="h4">4</td>
+        </tr>
+        <tr>
+          <td class="rl co-aia">AIA</td>
+          <td class="h4">4</td><td class="h4">4</td><td class="h3">3</td><td class="h5">5</td>
+          <td class="h4">4</td><td class="h5">5</td><td class="h3">3</td><td class="h5">5</td>
+          <td class="h4">4</td><td class="h2">2</td>
+        </tr>
+        <tr>
+          <td class="rl co-mb">MB Life</td>
+          <td class="h3">3</td><td class="h4">4</td><td class="h3">3</td><td class="h3">3</td>
+          <td class="h2">2</td><td class="h4">4</td><td class="h4">4</td><td class="h5">5</td>
+          <td class="h3">3</td><td class="h5">5</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hm-legend reveal">
+    <div class="hm-legend-item"><div class="hm-dot" style="background:#BCFCE4;"></div>5 — Xuất Sắc</div>
+    <div class="hm-legend-item"><div class="hm-dot" style="background:#D1FAE5;"></div>4 — Mạnh</div>
+    <div class="hm-legend-item"><div class="hm-dot" style="background:#FEF3C7;"></div>3 — Trung Bình</div>
+    <div class="hm-legend-item"><div class="hm-dot" style="background:#FEE2E2;"></div>2 — Yếu</div>
+  </div>
+</section>
+
+<!-- ─── MB LIFE SPOTLIGHT ─── -->
+<section class="mblife-hero" id="mblife">
+  <div class="mblife-grid">
+    <div>
+      <div class="mb-title-eyebrow">MB Life · Spotlight</div>
+      <h2 class="mb-heading">Bancassurance<br>MOAT Không<br>Thể Sao Chép</h2>
+      <p class="mb-desc">Đổi tên từ MB Ageas Life → <strong style="color:white;">MB Life</strong> ngày 04/08/2025. Doanh thu 3.094 tỷ H1/2025 (+48%). Liên doanh MB Bank × Ageas (Bỉ, Top 10 BH châu Âu).</p>
+      <div class="mb-stats">
+        <div class="mb-stat"><div class="mb-stat-num pink">+48%</div><div class="mb-stat-lbl">Doanh thu H1/2025 vs H1/2024</div></div>
+        <div class="mb-stat"><div class="mb-stat-num">Top 6</div><div class="mb-stat-lbl">Ranking khai thác mới toàn thị trường</div></div>
+        <div class="mb-stat"><div class="mb-stat-num pink">30M+</div><div class="mb-stat-lbl">Khách hàng MB Bank tiếp cận được</div></div>
+        <div class="mb-stat"><div class="mb-stat-num">100%</div><div class="mb-stat-lbl">Digital — không tiền mặt từ 01/07/2025</div></div>
+      </div>
+    </div>
+    <div class="mb-right">
+      <div class="mb-feature"><div class="mb-feature-icon">🏦</div><div><div class="mb-feature-title">Bancassurance MOAT</div><div class="mb-feature-text">300+ chi nhánh MB Bank. KH đã có trust với MB → trust transfer tự nhiên sang MB Life. Chi phí tìm KH (CAC) thấp nhất thị trường.</div></div></div>
+      <div class="mb-feature"><div class="mb-feature-icon">📊</div><div><div class="mb-feature-title">Data Intelligence</div><div class="mb-feature-text">Biết thu nhập, dòng tiền, hành vi chi tiêu của 30M+ KH MB Bank → tư vấn sản phẩm phù hợp từng profile cụ thể.</div></div></div>
+      <div class="mb-feature"><div class="mb-feature-icon">📱</div><div><div class="mb-feature-title">MBAL Style App</div><div class="mb-feature-text">Giải Industrie 4.0 Awards 2025 — "Top SP số thông minh". Mọi giao dịch 100% digital: mua, đóng phí, claim trên 1 app.</div></div></div>
+      <div class="mb-feature"><div class="mb-feature-icon">🏢</div><div><div class="mb-feature-title">SME & Corporate Edge</div><div class="mb-feature-text">Tiếp cận hàng trăm nghìn SME có quan hệ tín dụng với MB → BH nhóm nhân viên, key person insurance — blue ocean chưa khai thác.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SWOT ─── -->
+<section class="swot-section">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Phân Tích SWOT</div>
+    <h2 class="s-title">Điểm Mạnh · Yếu · Cơ Hội · Thách Thức<br>của MB Life 2025</h2>
+  </div>
+  <div class="swot-grid reveal">
+    <div class="swot-card s">
+      <div class="swot-corner">S</div>
+      <div class="swot-label">Strengths — Điểm Mạnh</div>
+      <div class="swot-title">Lợi Thế Bền Vững</div>
+      <ul class="swot-items">
+        <li class="swot-item">30M+ KH MB Bank — tiếp cận sẵn</li>
+        <li class="swot-item">Trust transfer từ thương hiệu MB Bank mạnh</li>
+        <li class="swot-item">Data KH phong phú: thu nhập, dòng tiền, hành vi</li>
+        <li class="swot-item">MBAL Style app 100% digital — Industrie 4.0 2025</li>
+        <li class="swot-item">Chi phí tìm KH (CAC) thấp nhất vs đại lý truyền thống</li>
+        <li class="swot-item">Ageas backing — Top 10 BH châu Âu</li>
+        <li class="swot-item">Doanh thu +48% H1/2025, vào Top 6 thị trường</li>
+      </ul>
+    </div>
+    <div class="swot-card w">
+      <div class="swot-corner">W</div>
+      <div class="swot-label">Weaknesses — Điểm Yếu</div>
+      <div class="swot-title">Cần Cải Thiện</div>
+      <ul class="swot-items">
+        <li class="swot-item">Brand BH độc lập còn bị nhận diện là "BH ngân hàng"</li>
+        <li class="swot-item">Danh mục SP ít hơn Manulife/AIA/Generali</li>
+        <li class="swot-item">Chưa có wellness ecosystem như AIA Vitality/GENVITA</li>
+        <li class="swot-item">Mạng đại lý độc lập hạn chế ngoài bancassurance</li>
+        <li class="swot-item">Chưa có SP wealth management premium cho HNW</li>
+        <li class="swot-item">CI coverage chưa bằng Generali (111 bệnh)</li>
+        <li class="swot-item">Phụ thuộc kênh banca — rủi ro tập trung</li>
+      </ul>
+    </div>
+    <div class="swot-card o">
+      <div class="swot-corner">O</div>
+      <div class="swot-label">Opportunities — Cơ Hội</div>
+      <div class="swot-title">Tiềm Năng Tăng Trưởng</div>
+      <ul class="swot-items">
+        <li class="swot-item">30M KH MB Bank chưa được khai thác hết</li>
+        <li class="swot-item">Gen Z digital native — dùng MBBank app hàng ngày</li>
+        <li class="swot-item">SME payroll qua MB → BH nhóm nhân viên blue ocean</li>
+        <li class="swot-item">Luật 2022 tái cơ cấu = cơ hội launch SP mới minh bạch</li>
+        <li class="swot-item">Nhu cầu sức khỏe post-COVID tăng mạnh</li>
+        <li class="swot-item">BHNT VN bắt đầu phục hồi sau 2 năm âm</li>
+        <li class="swot-item">Phúc lợi doanh nghiệp còn là thị trường chưa bão hòa</li>
+      </ul>
+    </div>
+    <div class="swot-card t">
+      <div class="swot-corner">T</div>
+      <div class="swot-label">Threats — Thách Thức</div>
+      <div class="swot-title">Rủi Ro Cần Theo Dõi</div>
+      <ul class="swot-items">
+        <li class="swot-item">Cạnh tranh gay gắt từ Manulife/AIA/Generali</li>
+        <li class="swot-item">ILP scandal 2022-23 vẫn ảnh hưởng niềm tin BHNT</li>
+        <li class="swot-item">Thị trường BHNT 2 năm liên tiếp tăng trưởng âm</li>
+        <li class="swot-item">Quy định Luật 2022 — áp lực tái cơ cấu liên tục</li>
+        <li class="swot-item">Bancassurance bị siết chặt quản lý pháp lý</li>
+        <li class="swot-item">Công nghệ thay đổi nhanh — chi phí đầu tư cao</li>
+        <li class="swot-item">Retention đại lý khó trong môi trường cạnh tranh cao</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PERSONAS ─── -->
+<section class="persona-section">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Chân Dung Khách Hàng</div>
+    <h2 class="s-title">5 Persona Mục Tiêu<br>của MB Life</h2>
+    <p class="s-desc">Từng persona được thiết kế dựa trên dữ liệu hành vi thực tế của KH MB Bank — không phải suy luận chung chung.</p>
+  </div>
+  <div class="persona-grid reveal">
+    <div class="persona-card"><div class="persona-avatar" style="background:var(--pink-pale);">🏠</div><div class="persona-name">Người Vay Mua Nhà</div><div class="persona-profile">30–42t · Dư nợ 1–3 tỷ tại MB · Vừa ký HĐ vay</div><div class="persona-need">Sợ không trả được khoản vay nếu không may bệnh nặng hoặc qua đời, gia đình bị xiết tài sản.</div><div class="persona-hook">"MB Life trả thay dư nợ nếu không may — vợ con không cần bán nhà."</div></div>
+    <div class="persona-card"><div class="persona-avatar" style="background:var(--blue-pale);">👔</div><div class="persona-name">CBNV Lương Về MB</div><div class="persona-profile">25–40t · Lương 15–50tr/tháng · Chưa có BHNT</div><div class="persona-need">Biết cần mua BH nhưng ngại gặp đại lý, ngại phức tạp, không biết bắt đầu từ đâu.</div><div class="persona-hook">"Trích 3–5% lương tự động mỗi tháng — bảo vệ ngay, không cần ra chi nhánh."</div></div>
+    <div class="persona-card"><div class="persona-avatar" style="background:rgba(245,158,11,.1);">💼</div><div class="persona-name">Chủ SME Quan Hệ MB</div><div class="persona-profile">35–55t · DN doanh thu 5–50 tỷ · Hạn mức tín dụng MB</div><div class="persona-need">Lo DN bị ảnh hưởng nghiêm trọng nếu bản thân bệnh nặng và không thể làm việc.</div><div class="persona-hook">"CI cho anh có tiền chữa bệnh mà không rút vốn KD hay ảnh hưởng hạn mức."</div></div>
+    <div class="persona-card"><div class="persona-avatar" style="background:rgba(0,200,150,.1);">📱</div><div class="persona-name">Gen Z MBBank App</div><div class="persona-profile">22–30t · Lương 8–18tr · Digital native thuần túy</div><div class="persona-need">Biết cần bảo vệ nhưng không muốn gặp đại lý, muốn mọi thứ đơn giản trên app.</div><div class="persona-hook">"200k/tháng bảo vệ ngay trên app MB. Claim chụp ảnh gửi app — xong trong 24h."</div></div>
+    <div class="persona-card"><div class="persona-avatar" style="background:var(--pink-pale);">💰</div><div class="persona-name">KH Tiết Kiệm MB</div><div class="persona-profile">35–55t · Có TK 200–500tr tại MB · Muốn tối ưu</div><div class="persona-need">Gửi tiết kiệm cảm thấy lãi suất thấp, muốn tích lũy hiệu quả hơn có kèm bảo vệ.</div><div class="persona-hook">"Tiết kiệm MB 5%/năm. An Vui Trọn Đời tích lũy + bảo vệ trọn đời — hai trong một."</div></div>
+  </div>
+</section>
+
+<!-- ─── GLOSSARY ─── -->
+<section class="glossary-section" id="glossary">
+  <div class="s-header reveal">
+    <div class="s-eyebrow">Glossary Thuật Ngữ</div>
+    <h2 class="s-title">20 Định Nghĩa Quan Trọng<br>Trong Quy Tắc Điều Khoản</h2>
+    <p class="s-desc">Ngôn ngữ dễ hiểu, ví dụ thực tế, mapping điều khoản pháp lý theo Luật KDBH 2022 + Giáo trình ĐLBH Cơ Bản 2024.</p>
+  </div>
+  <div class="glossary-grid reveal">
+    <div class="glossary-item"><div class="gl-term">Bên Mua Bảo Hiểm <span class="gl-law">K.24 Đ.4</span></div><div class="gl-def">Tổ chức/cá nhân ký HĐBH và đóng phí BH. Có thể là cùng 1 người hoặc khác với NĐBH.</div><div class="gl-ex">📌 Anh A mua BH cho con 5t → Anh A = BMBH, con = NĐBH. Phổ biến khi tư vấn BH trẻ em.</div></div>
+    <div class="glossary-item"><div class="gl-term">Người Được Bảo Hiểm <span class="gl-law">K.25 Đ.4</span></div><div class="gl-def">Người có tính mạng, SK, tài sản hoặc TNDS được bảo hiểm. Rủi ro gắn trực tiếp vào đây.</div><div class="gl-ex">📌 Mua BH tự bảo vệ bản thân → vừa là BMBH vừa là NĐBH — trường hợp phổ biến nhất.</div></div>
+    <div class="glossary-item"><div class="gl-term">Người Thụ Hưởng <span class="gl-law">K.26 Đ.4</span></div><div class="gl-def">Người được BMBH/NĐBH chỉ định nhận tiền BH. Chỉ có trong BH con người. Trả nhanh, không qua thừa kế.</div><div class="gl-ex">📌 KH 40t chỉ định vợ 100% QL tử vong → vợ nhận 2 tỷ ngay sau 15-30 ngày.</div></div>
+    <div class="glossary-item"><div class="gl-term">Giá Trị Tài Khoản <span class="gl-law">QTĐK ILP/LKC</span></div><div class="gl-def">Tổng tích lũy trong HĐBH liên kết đầu tư = phí đóng + lãi – phí quản lý. Biến động theo NAV (ILP) hoặc lãi cam kết (LKC).</div><div class="gl-ex">📌 VITA ĐT Thịnh Vượng: Giá trị TK cập nhật hàng ngày theo NAV quỹ. Có thể tăng hoặc giảm.</div></div>
+    <div class="glossary-item"><div class="gl-term">Giá Trị Hoàn Lại <span class="gl-law">QTĐK HĐBH</span></div><div class="gl-def">Số tiền nhận lại khi hủy HĐ trước hạn = Giá trị TK – phí hoàn lại. Thường thấp trong 3–5 năm đầu do initial charges.</div><div class="gl-ex">📌 Hủy HĐ hỗn hợp năm thứ 2: chỉ nhận ~30-40% phí đã đóng. Không nên tư vấn KH hủy HĐ sớm!</div></div>
+    <div class="glossary-item"><div class="gl-term">Phí BH Cơ Bản <span class="gl-law">QTĐK HĐBH</span></div><div class="gl-def">Phí bắt buộc duy trì HĐ chính. Quyết định STBH tử vong. Cơ sở tính giá trị hoàn lại và dự phòng toán học.</div><div class="gl-ex">📌 MB Life An Vui Trọn Đời: phí cơ bản 30tr/năm → STBH tử vong 1,5 tỷ. Phí cố định suốt TH đóng phí.</div></div>
+    <div class="glossary-item"><div class="gl-term">Phí BH Đóng Thêm <span class="gl-law">QTĐK ILP/LKC</span></div><div class="gl-def">Khoản phí tự nguyện nộp thêm ngoài phí cơ bản, chủ yếu vào tài khoản đầu tư. Không tăng STBH tử vong cơ bản.</div><div class="gl-ex">📌 Chubb Tự Do An Phát: KH đóng thêm 100tr bất kỳ lúc nào vào quỹ ĐT. Không cần thẩm định y tế.</div></div>
+    <div class="glossary-item"><div class="gl-term">Số Tiền Bảo Hiểm <span class="gl-law">K.27 Đ.4</span></div><div class="gl-def">Mức bảo vệ tối đa DNBH cam kết trả khi xảy ra SK BH. Nguyên tắc khoán — không phụ thuộc thiệt hại thực tế.</div><div class="gl-ex">📌 STBH 2 tỷ → chết bất kỳ lúc nào trong TH BH → người TH nhận đúng 2 tỷ.</div></div>
+    <div class="glossary-item"><div class="gl-term">Thời Gian Chờ <span class="gl-law">QTĐK điều khoản</span></div><div class="gl-def">Khoảng thời gian sau ký HĐ DNBH không chịu trách nhiệm với một số rủi ro nhất định. Ngăn gian lận bệnh sẵn có.</div><div class="gl-ex">📌 Ung thư = 90 ngày; bệnh khác = 30 ngày; thai sản = 270 ngày; bệnh sẵn có = 12–24 tháng.</div></div>
+    <div class="glossary-item"><div class="gl-term">Loại Trừ Bảo Hiểm <span class="gl-law">QTĐK điều khoản</span></div><div class="gl-def">Rủi ro DNBH không bồi thường dù xảy ra trong TH BH. Tuyệt đối (không thể BH) vs tương đối (thêm phí được).</div><div class="gl-ex">📌 Tuyệt đối: tự tử 2 năm đầu, chiến tranh, HIV, hành động cố ý NĐBH. Không thể mở rộng.</div></div>
+    <div class="glossary-item"><div class="gl-term">Sự Kiện Bảo Hiểm <span class="gl-law">Đ.4 Luật 2022</span></div><div class="gl-def">Sự kiện khách quan kích hoạt nghĩa vụ trả tiền của DNBH. Phải ngẫu nhiên, không lường trước, không do cố ý.</div><div class="gl-ex">📌 BHNT hỗn hợp: SK BH = (1) tử vong trong TH → trả STBH; (2) sống đến đáo hạn → nhận tiền đáo hạn.</div></div>
+    <div class="glossary-item"><div class="gl-term">Quyền Lợi Tử Vong <span class="gl-law">NT Khoán</span></div><div class="gl-def">DNBH trả STBH cho người TH khi NĐBH qua đời trong TH BH. Nguyên tắc khoán — không phụ thuộc thu nhập/tài sản.</div><div class="gl-ex">📌 Hook: "Nếu anh không có mặt ngày mai, con anh học đại học bằng gì? Khoản này đảm bảo 20 năm học phí."</div></div>
+    <div class="glossary-item"><div class="gl-term">Quyền Lợi Thương Tật <span class="gl-law">Bảng tỷ lệ HĐBH</span></div><div class="gl-def">Trả theo bảng tỷ lệ thương tật do tai nạn. TPDT (toàn bộ vĩnh viễn) = 100% STBH. Kèm miễn đóng phí.</div><div class="gl-ex">📌 Mất 1 bàn tay = 50% STBH. Mù cả 2 mắt = 100% STBH + miễn đóng phí suốt TH còn lại.</div></div>
+    <div class="glossary-item"><div class="gl-term">Bệnh Hiểm Nghèo (CI) <span class="gl-law">Rider điều khoản</span></div><div class="gl-def">Trả 1 lần khi chẩn đoán bệnh CI. KH dùng tiền tự do — không cần hóa đơn BV. Không giảm STBH tử vong chính.</div><div class="gl-ex">📌 Generali VITA: 111 bệnh CI. Ung thư → nhận 1 tỷ. Tiếp tục sống → vẫn còn QL tử vong 1 tỷ sau này.</div></div>
+    <div class="glossary-item"><div class="gl-term">Thời Hạn BH vs Đóng Phí <span class="gl-law">QTĐK HĐBH</span></div><div class="gl-def">Thời hạn BH = thời gian HĐ có hiệu lực. Thời hạn đóng phí thường ngắn hơn — điểm bán hàng quan trọng.</div><div class="gl-ex">📌 "Đóng 10 bảo vệ 20": đóng phí 10 năm, BH vẫn còn đến năm 20. Khách hàng rất thích tính năng này.</div></div>
+    <div class="glossary-item"><div class="gl-term">Liên Kết Chung vs ILP <span class="gl-law">Phân loại BHNT</span></div><div class="gl-def">LKC: DNBH quản lý quỹ + cam kết lãi tối thiểu → KH an toàn. ILP: KH tự chọn quỹ, chịu 100% rủi ro ĐT.</div><div class="gl-ex">📌 Thường hay nhầm: Generali VITA Ngày Mai Vững Chắc = LKC (an toàn). VITA Đầu Tư Thịnh Vượng = ILP (rủi ro).</div></div>
+    <div class="glossary-item"><div class="gl-term">Giá Trị BH vs STBH <span class="gl-law">Đ.47 Luật 2022</span></div><div class="gl-def">Giá trị BH = giá thị trường TS. STBH ≤ Giá trị BH (BH tài sản). Bảo hiểm trên giá trị → vi phạm pháp luật.</div><div class="gl-ex">📌 Nhà trị giá 2 tỷ → STBH tối đa 2 tỷ. Bảo hiểm 3 tỷ cho nhà 2 tỷ = vi phạm Luật KDBH 2022.</div></div>
+    <div class="glossary-item"><div class="gl-term">Thế Quyền vs Khoán <span class="gl-law">Đ.44 Luật 2022</span></div><div class="gl-def">BH tài sản/PNT: sau BT, DNBH đòi lại từ bên thứ 3 (thế quyền). BHNT/SK: không áp dụng — KH nhận từ mọi HĐBH.</div><div class="gl-ex">📌 Điểm hay thi: "Thế quyền không áp dụng BHNT/SK" là phân biệt quan trọng giữa khoán và bồi thường.</div></div>
+    <div class="glossary-item"><div class="gl-term">Mức Miễn Thường <span class="gl-law">QTĐK BH PNT</span></div><div class="gl-def">Phần tổn thất KH tự chịu, DNBH không bồi thường. Có khấu trừ (trừ mức miễn) và không khấu trừ (trả toàn bộ nếu vượt mức).</div><div class="gl-ex">📌 BH xe miễn thường 1tr/vụ: thiệt hại 500k → KH tự chịu. Thiệt hại 5tr → BH trả 4tr.</div></div>
+    <div class="glossary-item"><div class="gl-term">Tái Bảo Hiểm <span class="gl-law">K.29 Đ.4 Luật 2022</span></div><div class="gl-def">"BH của BH" — DNBH chuyển một phần rủi ro sang DNBH khác (tái BH). Giúp phân tán rủi ro lớn, ổn định khả năng thanh toán.</div><div class="gl-ex">📌 Công trình 1.000 tỷ → 1 DNBH không đủ sức nhận → 3-5 DNBH đồng BH, mỗi DNBH tái BH thêm ra nước ngoài.</div></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:16px;">🛡</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:white;margin-bottom:10px;">MB Life · Insurance Report</div>
+      <p>Báo cáo phân tích thị trường bảo hiểm Việt Nam 2025 — phục vụ kỳ thi tuyển chọn nhân sự nội bộ MB Life.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Nội Dung</h4>
+      <ul>
+        <li onclick="scrollTo('market')">Tổng Quan Thị Trường</li>
+        <li onclick="scrollTo('classify')">Phân Loại BH</li>
+        <li onclick="scrollTo('companies')">Đối Thủ Cạnh Tranh</li>
+        <li onclick="scrollTo('mblife')">MB Life Spotlight</li>
+        <li onclick="scrollTo('glossary')">Glossary Thuật Ngữ</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Nguồn Dữ Liệu</h4>
+      <ul>
+        <li>Luật KDBH 08/2022/QH15</li>
+        <li>Giáo trình ĐLBH 2024</li>
+        <li>manulife.com.vn</li>
+        <li>generali.vn</li>
+        <li>chubb.com/vn-vn</li>
+        <li>aia.com.vn / mblife.vn</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Cập Nhật</h4>
+      <ul>
+        <li>Dữ liệu T8/2025</li>
+        <li>MB Life đổi tên 04/08/2025</li>
+        <li>AIA Khỏe Bình An T8/2025</li>
+        <li>Tái cơ cấu SP sau 01/07/2025</li>
+        <li>Ranking H1/2025 verified</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 MB Life Insurance Report · Tài liệu nội bộ phục vụ đào tạo</p>
+    <div class="footer-tags">
+      <span class="footer-tag">BHNT</span>
+      <span class="footer-tag">Luật 2022</span>
+      <span class="footer-tag">MB Life</span>
+      <span class="footer-tag">Bancassurance</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav shadow on scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Smooth scroll
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+// Stagger animation for cards
+document.querySelectorAll('.market-grid .market-card, .company-grid .company-card, .persona-grid .persona-card').forEach((el,i) => {
+  el.style.animationDelay = `${i * 0.08}s`;
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+});
+
+const cardObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      setTimeout(() => {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+      }, parseFloat(e.target.style.animationDelay || 0) * 1000);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.market-card, .company-card, .persona-card').forEach(el => cardObserver.observe(el));
+</script>
+</body>
+</html>
