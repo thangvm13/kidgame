@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🌟 Kid Learning Hub</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{
+      font-family:'Segoe UI','Arial Rounded MT Bold',Arial,sans-serif;
+      background:linear-gradient(145deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+      min-height:100vh; display:flex; justify-content:center;
+    }
+    .wrap{ width:100%; max-width:440px; padding:24px 16px 40px; }
+
+    /* HEADER */
+    .hero { text-align:center; margin-bottom:28px; }
+    .hero-logo { font-size:4em; display:block; margin-bottom:8px; animation:float 3s ease-in-out infinite; }
+    .hero-title { font-size:2em; font-weight:900; color:#fff; letter-spacing:-0.5px; }
+    .hero-sub   { color:rgba(255,255,255,.55); font-size:.9em; margin-top:4px; }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+    /* STARS TOTAL */
+    .total-bar{
+      background:rgba(255,255,255,.1); border-radius:14px;
+      padding:12px 18px; color:#FFD93D; font-size:.95em;
+      margin-bottom:24px; text-align:center; border:1px solid rgba(255,255,255,.08);
+    }
+
+    /* SUBJECT CARDS */
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .card {
+      background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.1);
+      border-radius:20px; padding:20px 12px;
+      text-align:center; cursor:pointer; text-decoration:none;
+      transition:.18s; display:block;
+    }
+    .card:active{ transform:scale(.96); background:rgba(255,255,255,.13); }
+    .card-ico  { font-size:2.6em; display:block; margin-bottom:8px; }
+    .card-name { font-size:.95em; font-weight:700; color:#fff; display:block; }
+    .card-stars{ font-size:.78em; color:#FFD93D; display:block; margin-top:5px; }
+    .card-prog { height:4px; border-radius:4px; background:rgba(255,255,255,.15); margin-top:8px; overflow:hidden; }
+    .card-fill { height:100%; border-radius:4px; }
+
+    .c-math    { border-color:rgba(255,107,107,.3); }
+    .c-english { border-color:rgba(78,205,196,.3); }
+    .c-science { border-color:rgba(69,183,209,.3); }
+    .c-geo     { border-color:rgba(150,206,180,.3); }
+    .c-history { border-color:rgba(212,165,116,.3); }
+    .c-lit     { border-color:rgba(199,125,255,.3); }
+
+    .fill-math    { background:#FF6B6B; }
+    .fill-english { background:#4ECDC4; }
+    .fill-science { background:#45B7D1; }
+    .fill-geo     { background:#96CEB4; }
+    .fill-history { background:#D4A574; }
+    .fill-lit     { background:#C77DFF; }
+
+    /* FOOTER */
+    .footer { text-align:center; color:rgba(255,255,255,.3); font-size:.78em; margin-top:28px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="hero-logo">🚀</span>
+    <h1 class="hero-title">Kid Learning Hub</h1>
+    <p class="hero-sub">Học vui mỗi ngày — Lớp 4 🎒</p>
+  </div>
+
+  <div class="total-bar">⭐ Tổng sao đã đạt: <strong id="total">0</strong> / 72</div>
+
+  <div class="grid">
+    <a class="card c-math" href="toan.html">
+      <span class="card-ico">🔢</span>
+      <span class="card-name">Toán Học</span>
+      <span class="card-stars" id="s-math">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-math" id="p-math" style="width:0%"></div></div>
+    </a>
+    <a class="card c-english" href="tieng-anh.html">
+      <span class="card-ico">🔤</span>
+      <span class="card-name">Tiếng Anh</span>
+      <span class="card-stars" id="s-english">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-english" id="p-english" style="width:0%"></div></div>
+    </a>
+    <a class="card c-science" href="khoa-hoc.html">
+      <span class="card-ico">🔬</span>
+      <span class="card-name">Khoa Học</span>
+      <span class="card-stars" id="s-science">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-science" id="p-science" style="width:0%"></div></div>
+    </a>
+    <a class="card c-geo" href="dia-ly.html">
+      <span class="card-ico">🗺️</span>
+      <span class="card-name">Địa Lý</span>
+      <span class="card-stars" id="s-geo">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-geo" id="p-geo" style="width:0%"></div></div>
+    </a>
+    <a class="card c-history" href="lich-su.html">
+      <span class="card-ico">🏛️</span>
+      <span class="card-name">Lịch Sử</span>
+      <span class="card-stars" id="s-history">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-history" id="p-history" style="width:0%"></div></div>
+    </a>
+    <a class="card c-lit" href="van-hoc.html">
+      <span class="card-ico">📖</span>
+      <span class="card-name">Văn Học</span>
+      <span class="card-stars" id="s-lit">☆☆☆☆</span>
+      <div class="card-prog"><div class="card-fill fill-lit" id="p-lit" style="width:0%"></div></div>
+    </a>
+  </div>
+  <p class="footer">Mỗi môn 4 cấp độ · 10 câu mỗi màn · Thu thập sao ⭐</p>
+</div>
+
+<script>
+const SUBJECTS=[
+  {id:'math',   el:'math',    name:'Toán',   levels:['easy','medium','hard','expert']},
+  {id:'english',el:'english', name:'Anh',    levels:['easy','medium','hard','expert']},
+  {id:'science',el:'science', name:'KH',     levels:['easy','medium','hard','expert']},
+  {id:'geo',    el:'geo',     name:'ĐL',     levels:['easy','medium','hard','expert']},
+  {id:'history',el:'history', name:'LS',     levels:['easy','medium','hard','expert']},
+  {id:'lit',    el:'lit',     name:'VH',     levels:['easy','medium','hard','expert']},
+];
+function getStars(subj,lv){ return parseInt(localStorage.getItem('stars_'+subj+'_'+lv)||'0'); }
+
+let total=0;
+SUBJECTS.forEach(s=>{
+  let sum=0;
+  s.levels.forEach(lv=>{ sum+=getStars(s.id,lv); });
+  total+=sum;
+  const maxPerSubj=s.levels.length*3;
+  const pct=(sum/maxPerSubj)*100;
+  const starStr = s.levels.map(lv=>{ const n=getStars(s.id,lv); return n?'⭐'.repeat(n):'☆'; }).join('');
+  const el=document.getElementById('s-'+s.el);
+  const pel=document.getElementById('p-'+s.el);
+  if(el) el.textContent=starStr;
+  if(pel) pel.style.width=pct+'%';
+});
+document.getElementById('total').textContent=total;
+</script>
+</body>
+</html>

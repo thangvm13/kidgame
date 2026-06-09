@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>🗺️ Địa Lý</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'geo', name:'Địa Lý', emoji:'🗺️', theme:'geo-theme',
+  tagline:'Khám phá đất nước và thế giới! 🌏',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Địa lý Việt Nam cơ bản',
+      questions:[
+        {type:'mc', emoji:'🏛️', q:'Thủ đô của Việt Nam là?', opts:['Hà Nội','Hồ Chí Minh','Đà Nẵng','Huế'], ans:'Hà Nội'},
+        {type:'mc', q:'Việt Nam nằm ở khu vực nào?', opts:['Đông Nam Á','Đông Á','Nam Á','Trung Á'], ans:'Đông Nam Á'},
+        {type:'mc', emoji:'🏔️', q:'Dãy núi dài nhất Việt Nam là?', opts:['Trường Sơn','Hoàng Liên Sơn','Con Voi','Tam Đảo'], ans:'Trường Sơn'},
+        {type:'mc', q:'Sông dài nhất miền Nam Việt Nam là?', opts:['Sông Cửu Long','Sông Hồng','Sông Mã','Sông Đà'], ans:'Sông Cửu Long'},
+        {type:'mc', q:'Việt Nam có bao nhiêu tỉnh và thành phố trực thuộc TW?', opts:['63','60','65','58'], ans:'63'},
+        {type:'mc', emoji:'🏖️', q:'Vịnh Hạ Long thuộc tỉnh nào?', opts:['Quảng Ninh','Hải Phòng','Thanh Hóa','Ninh Bình'], ans:'Quảng Ninh'},
+        {type:'mc', q:'Đỉnh núi cao nhất Việt Nam là?', opts:['Fansipan','Bạch Mã','Lang Biang','Ngọc Linh'], ans:'Fansipan'},
+        {type:'mc', q:'Sông Hồng chảy qua thành phố nào?', opts:['Hà Nội','Huế','Đà Nẵng','Cần Thơ'], ans:'Hà Nội'},
+        {type:'mc', q:'Việt Nam giáp biển nào?', opts:['Biển Đông','Biển Tây','Thái Bình Dương','Ấn Độ Dương'], ans:'Biển Đông'},
+        {type:'mc', emoji:'🌆', q:'Thành phố nào đông dân nhất Việt Nam?', opts:['Hồ Chí Minh','Hà Nội','Đà Nẵng','Hải Phòng'], ans:'Hồ Chí Minh'},
+        {type:'mc', q:'Đồng bằng sông Cửu Long còn gọi là?', opts:['Miền Tây Nam Bộ','Miền Đông Nam Bộ','Tây Nguyên','Đồng bằng Bắc Bộ'], ans:'Miền Tây Nam Bộ'},
+        {type:'mc', q:'Việt Nam nằm trên bán đảo nào?', opts:['Đông Dương','Ả Rập','Triều Tiên','Iberia'], ans:'Đông Dương'},
+        {type:'mc', q:'Huế là cố đô của triều đại nào?', opts:['Nhà Nguyễn','Nhà Lý','Nhà Trần','Nhà Lê'], ans:'Nhà Nguyễn'},
+        {type:'mc', q:'Phú Quốc là đảo lớn nhất Việt Nam thuộc tỉnh nào?', opts:['Kiên Giang','Bà Rịa - Vũng Tàu','Bình Thuận','Cà Mau'], ans:'Kiên Giang'},
+        {type:'mc', q:'Đà Lạt thuộc tỉnh nào?', opts:['Lâm Đồng','Đắk Lắk','Gia Lai','Kon Tum'], ans:'Lâm Đồng'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Vùng miền, kinh tế, dân cư Việt Nam',
+      questions:[
+        {type:'mc', q:'Tây Nguyên gồm mấy tỉnh?', opts:['5','4','6','7'], ans:'5'},
+        {type:'mc', q:'Cây công nghiệp chủ yếu của Tây Nguyên là?', opts:['Cà phê','Lúa','Mía','Cao su'], ans:'Cà phê'},
+        {type:'mc', q:'Vùng nào trồng nhiều lúa nhất Việt Nam?', opts:['Đồng bằng sông Cửu Long','Đồng bằng sông Hồng','Tây Nguyên','Duyên hải miền Trung'], ans:'Đồng bằng sông Cửu Long'},
+        {type:'mc', q:'Dân tộc nào đông người nhất Việt Nam?', opts:['Kinh','Tày','Thái','Mường'], ans:'Kinh'},
+        {type:'mc', q:'Cảng biển lớn nhất miền Bắc là?', opts:['Hải Phòng','Quảng Ninh','Nghệ An','Thanh Hóa'], ans:'Hải Phòng'},
+        {type:'mc', q:'Vùng có khí hậu cận xích đạo là?', opts:['Nam Bộ','Bắc Bộ','Trung Bộ','Tây Bắc'], ans:'Nam Bộ'},
+        {type:'mc', q:'Sông Mê Công chảy vào Việt Nam được gọi là?', opts:['Sông Cửu Long','Sông Hồng','Sông Đà','Sông Mã'], ans:'Sông Cửu Long'},
+        {type:'mc', q:'Miền Bắc có mấy mùa rõ rệt?', opts:['4','2','3','1'], ans:'4'},
+        {type:'mc', q:'Vùng kinh tế trọng điểm phía Nam gồm trung tâm là tỉnh/TP nào?', opts:['TP. Hồ Chí Minh','Bình Dương','Đồng Nai','Vũng Tàu'], ans:'TP. Hồ Chí Minh'},
+        {type:'mc', q:'Dầu mỏ Việt Nam được khai thác chủ yếu ở đâu?', opts:['Thềm lục địa phía Nam','Vịnh Hạ Long','Đồng bằng sông Hồng','Tây Nguyên'], ans:'Thềm lục địa phía Nam'},
+        {type:'mc', q:'Quần đảo nào thuộc chủ quyền Việt Nam?', opts:['Hoàng Sa và Trường Sa','Maldives','Philippines','Indonesia'], ans:'Hoàng Sa và Trường Sa'},
+        {type:'mc', q:'Việt Nam thuộc múi giờ nào?', opts:['GMT+7','GMT+8','GMT+6','GMT+5'], ans:'GMT+7'},
+        {type:'mc', q:'Cố đô Hoa Lư thuộc tỉnh nào?', opts:['Ninh Bình','Nam Định','Hà Nam','Thanh Hóa'], ans:'Ninh Bình'},
+        {type:'mc', q:'Mũi Cà Mau là điểm cực nào của Việt Nam?', opts:['Cực Nam','Cực Bắc','Cực Đông','Cực Tây'], ans:'Cực Nam'},
+        {type:'mc', q:'Đường Trường Sơn còn gọi là?', opts:['Đường Hồ Chí Minh','Đường Xuyên Á','Đường Quốc lộ 1','Đường biển'], ans:'Đường Hồ Chí Minh'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Địa lý thế giới: châu lục, đại dương',
+      questions:[
+        {type:'mc', q:'Châu lục nào lớn nhất thế giới?', opts:['Châu Á','Châu Phi','Châu Âu','Châu Mỹ'], ans:'Châu Á'},
+        {type:'mc', q:'Đại dương nào lớn nhất thế giới?', opts:['Thái Bình Dương','Đại Tây Dương','Ấn Độ Dương','Bắc Băng Dương'], ans:'Thái Bình Dương'},
+        {type:'mc', q:'Sông dài nhất thế giới là?', opts:['Sông Nile','Sông Amazon','Sông Trường Giang','Sông Mississippi'], ans:'Sông Nile'},
+        {type:'mc', q:'Núi cao nhất thế giới là?', opts:['Everest','K2','Kangchenjunga','Makalu'], ans:'Everest'},
+        {type:'mc', q:'Thủ đô của Nhật Bản là?', opts:['Tokyo','Osaka','Kyoto','Seoul'], ans:'Tokyo'},
+        {type:'mc', q:'Sahara là sa mạc lớn nhất ở châu nào?', opts:['Châu Phi','Châu Á','Châu Mỹ','Châu Úc'], ans:'Châu Phi'},
+        {type:'mc', q:'Đất nước nào rộng nhất thế giới?', opts:['Nga','Canada','Trung Quốc','Mỹ'], ans:'Nga'},
+        {type:'mc', q:'Thủ đô của Australia là?', opts:['Canberra','Sydney','Melbourne','Brisbane'], ans:'Canberra'},
+        {type:'mc', q:'Rừng Amazon nằm chủ yếu ở quốc gia nào?', opts:['Brazil','Colombia','Peru','Venezuela'], ans:'Brazil'},
+        {type:'mc', q:'Biển Chết nổi tiếng vì?', opts:['Độ mặn rất cao','Độ sâu lớn nhất','Nhiều san hô','Sóng to nhất'], ans:'Độ mặn rất cao'},
+        {type:'mc', q:'Kênh đào Panama nối liền?', opts:['Đại Tây Dương và Thái Bình Dương','Ấn Độ Dương và Thái Bình Dương','Địa Trung Hải và Biển Đỏ','Bắc Băng Dương và Thái Bình Dương'], ans:'Đại Tây Dương và Thái Bình Dương'},
+        {type:'mc', q:'Đường xích đạo đi qua châu lục nào?', opts:['Châu Phi, Nam Mỹ, Châu Á','Chỉ Châu Phi','Chỉ Nam Mỹ','Châu Âu, Châu Á'], ans:'Châu Phi, Nam Mỹ, Châu Á'},
+        {type:'mc', q:'Thủ đô của Pháp là?', opts:['Paris','London','Berlin','Rome'], ans:'Paris'},
+        {type:'mc', q:'Dân số đông nhất thế giới là nước nào?', opts:['Ấn Độ','Trung Quốc','Mỹ','Indonesia'], ans:'Ấn Độ'},
+        {type:'mc', q:'Hồ lớn nhất thế giới là?', opts:['Biển Caspi','Hồ Superior','Hồ Victoria','Hồ Baikal'], ans:'Biển Caspi'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Khí hậu, kinh tế, địa lý nâng cao',
+      questions:[
+        {type:'mc', q:'Khí hậu nhiệt đới gió mùa đặc trưng bởi?', opts:['Mưa nhiều và nóng quanh năm','Lạnh quanh năm','Khô cằn','4 mùa rõ rệt'], ans:'Mưa nhiều và nóng quanh năm'},
+        {type:'mc', q:'Tổ chức ASEAN có bao nhiêu thành viên?', opts:['10','8','12','6'], ans:'10'},
+        {type:'mc', q:'Nước nào có GDP lớn nhất thế giới?', opts:['Mỹ','Trung Quốc','Nhật Bản','Đức'], ans:'Mỹ'},
+        {type:'mc', q:'Quần đảo Galapagos thuộc nước nào?', opts:['Ecuador','Peru','Chile','Colombia'], ans:'Ecuador'},
+        {type:'mc', q:'Dòng hải lưu Gulf Stream ảnh hưởng khí hậu?', opts:['Tây Âu','Đông Á','Nam Mỹ','Châu Phi'], ans:'Tây Âu'},
+        {type:'mc', q:'Hiện tượng El Niño gây ra?', opts:['Hạn hán và lũ lụt bất thường','Bão nhiều hơn','Băng tan nhanh hơn','Động đất'], ans:'Hạn hán và lũ lụt bất thường'},
+        {type:'mc', q:'Vành đai lửa Thái Bình Dương gây ra nhiều?', opts:['Núi lửa và động đất','Bão lớn','Sóng thần','Hạn hán'], ans:'Núi lửa và động đất'},
+        {type:'mc', q:'Nước nào xuất khẩu dầu mỏ nhiều nhất?', opts:['Ả Rập Xê Út','Nga','Mỹ','Iraq'], ans:'Ả Rập Xê Út'},
+        {type:'mc', q:'Mực nước biển dâng là hậu quả của?', opts:['Biến đổi khí hậu toàn cầu','Triều cường','Gió bão','Núi lửa'], ans:'Biến đổi khí hậu toàn cầu'},
+        {type:'mc', q:'Đường bờ biển dài nhất thế giới thuộc?', opts:['Canada','Nga','Australia','Norway'], ans:'Canada'},
+        {type:'mc', q:'Tốc độ gió cấp 12 (bão) là bao nhiêu?', opts:['117 km/h','100 km/h','90 km/h','150 km/h'], ans:'117 km/h'},
+        {type:'mc', q:'Lục địa nào không có quốc gia nào?', opts:['Nam Cực','Bắc Cực','Greenland','Iceland'], ans:'Nam Cực'},
+        {type:'mc', q:'Hệ thống núi Himalaya thuộc châu nào?', opts:['Châu Á','Châu Âu','Châu Phi','Nam Mỹ'], ans:'Châu Á'},
+        {type:'mc', q:'Biển Aral thu hẹp do?', opts:['Lấy nước tưới tiêu quá mức','Biến đổi khí hậu','Ô nhiễm','Động đất'], ans:'Lấy nước tưới tiêu quá mức'},
+        {type:'mc', q:'Singapore phát triển kinh tế nhờ?', opts:['Cảng biển và dịch vụ tài chính','Dầu mỏ','Nông nghiệp','Du lịch bãi biển'], ans:'Cảng biển và dịch vụ tài chính'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

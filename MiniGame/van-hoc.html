@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>📖 Văn Học</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'lit', name:'Văn Học', emoji:'📖', theme:'lit-theme',
+  tagline:'Yêu văn học Việt Nam! ✍️',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Truyện dân gian, nhân vật nổi tiếng',
+      questions:[
+        {type:'mc', emoji:'🐢', q:'Trong "Sự tích Hồ Gươm", thần Kim Quy đòi lại điều gì?', opts:['Thanh gươm','Mũi tên','Chiếc nỏ','Quyển sách'], ans:'Thanh gươm'},
+        {type:'mc', q:'Truyện "Tấm Cám" thuộc thể loại?', opts:['Cổ tích','Thần thoại','Truyền thuyết','Ngụ ngôn'], ans:'Cổ tích'},
+        {type:'mc', emoji:'🎋', q:'Thánh Gióng đánh giặc bằng gì sau khi gãy roi?', opts:['Bụi tre','Cành cây','Đá cuội','Tay không'], ans:'Bụi tre'},
+        {type:'mc', q:'Trong "Dế Mèn phiêu lưu ký", Dế Mèn có tính cách gì?', opts:['Kiêu ngạo nhưng sau biết hối cải','Nhút nhát','Hiền lành','Xấu xa'], ans:'Kiêu ngạo nhưng sau biết hối cải'},
+        {type:'mc', emoji:'🦊', q:'Trong truyện ngụ ngôn, con vật nào thường tượng trưng cho sự xảo quyệt?', opts:['Cáo','Sư tử','Thỏ','Rùa'], ans:'Cáo'},
+        {type:'mc', q:'"Chú Cuội ngồi gốc cây đa" là hình ảnh trong truyện nào?', opts:['Sự tích chú Cuội','Sự tích cây tre','Sự tích hoa sen','Sự tích dưa hấu'], ans:'Sự tích chú Cuội'},
+        {type:'mc', q:'An Dương Vương có vũ khí đặc biệt là?', opts:['Nỏ thần','Gươm thần','Giáo thần','Khiên thần'], ans:'Nỏ thần'},
+        {type:'mc', emoji:'🌸', q:'Trong "Cây tre trăm đốt", điều ước của anh nông dân là?', opts:['Lấy được vợ đẹp','Giàu có','Trở thành quan','Sức khỏe'], ans:'Lấy được vợ đẹp'},
+        {type:'mc', q:'Sơn Tinh và Thủy Tinh tranh nhau điều gì?', opts:['Lấy Mị Nương','Làm vua','Của cải','Đất đai'], ans:'Lấy Mị Nương'},
+        {type:'mc', q:'Truyện "Con Rồng Cháu Tiên" giải thích nguồn gốc?', opts:['Người Việt Nam','Cây lúa','Biển Đông','Núi Hùng'], ans:'Người Việt Nam'},
+        {type:'mc', q:'Nhân vật Mã Lương có tài năng đặc biệt gì?', opts:['Vẽ thứ gì thành thật thứ đó','Hát hay','Bay lên trời','Chữa bệnh'], ans:'Vẽ thứ gì thành thật thứ đó'},
+        {type:'mc', q:'Trong "Ông lão đánh cá và con cá vàng", bà vợ ước điều gì cuối cùng?', opts:['Làm Long Vương ngự biển','Làm hoàng hậu','Làm bà chúa','Giàu có'], ans:'Làm Long Vương ngự biển'},
+        {type:'mc', emoji:'🐊', q:'"Thạch Sanh" đánh nhau với con vật nào?', opts:['Chằn tinh và đại bàng','Rồng','Hổ','Sư tử'], ans:'Chằn tinh và đại bàng'},
+        {type:'mc', q:'Truyện ngụ ngôn "Thỏ và Rùa" dạy điều gì?', opts:['Kiên trì sẽ thành công','Nhanh nhẹn quan trọng','Giỏi là tốt','Cần sức mạnh'], ans:'Kiên trì sẽ thành công'},
+        {type:'mc', q:'Tác giả "Dế Mèn phiêu lưu ký" là?', opts:['Tô Hoài','Nam Cao','Nguyễn Nhật Ánh','Nguyên Hồng'], ans:'Tô Hoài'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Tục ngữ, thành ngữ, ca dao Việt Nam',
+      questions:[
+        {type:'fill', q:'"Học thầy không tày học ___"', opts:['bạn','cha','mẹ','sách'], ans:'bạn'},
+        {type:'fill', q:'"Uống nước nhớ ___"', opts:['nguồn','bến','suối','giếng'], ans:'nguồn'},
+        {type:'mc', q:'"Có công mài sắt có ngày nên kim" ý nghĩa là?', opts:['Kiên trì sẽ thành công','Làm việc vội vàng','Không cần cố gắng','Sắt tốt hơn kim'], ans:'Kiên trì sẽ thành công'},
+        {type:'fill', q:'"Một cây làm chẳng nên non, ba cây chụm lại nên ___ núi cao"', opts:['hòn','ngọn','đỉnh','dãy'], ans:'hòn'},
+        {type:'mc', q:'"Lời nói chẳng mất tiền mua, lựa lời mà nói cho vừa lòng nhau" khuyên điều gì?', opts:['Nói năng lịch sự, đúng mực','Im lặng là vàng','Nói nhiều hơn nghe','Tiết kiệm lời nói'], ans:'Nói năng lịch sự, đúng mực'},
+        {type:'fill', q:'"Thương người như thể ___ ta"', opts:['thương','yêu','quý','kính'], ans:'thương'},
+        {type:'mc', q:'"Ăn quả nhớ kẻ trồng cây" có nghĩa là?', opts:['Biết ơn người có công','Thích ăn hoa quả','Phải tự trồng cây','Ăn nhiều quả tốt'], ans:'Biết ơn người có công'},
+        {type:'fill', q:'"Đi một ngày đàng, học một sàng ___"', opts:['khôn','kiến','thức','hay'], ans:'khôn'},
+        {type:'mc', q:'"Bầu ơi thương lấy bí cùng" muốn nói điều gì?', opts:['Đoàn kết, giúp đỡ nhau','Yêu cây rau xanh','Ghét sự khác biệt','Cần làm vườn'], ans:'Đoàn kết, giúp đỡ nhau'},
+        {type:'fill', q:'"Công cha như núi Thái Sơn, nghĩa mẹ như nước trong nguồn ___ ra"', opts:['chảy','tuôn','dâng','cuộn'], ans:'chảy'},
+        {type:'mc', q:'Ca dao "Nhiễu điều phủ lấy giá gương, người trong một nước phải thương nhau cùng" nói về?', opts:['Tình yêu đồng bào','Yêu thiên nhiên','Tôn kính thần linh','Cách trang trí nhà'], ans:'Tình yêu đồng bào'},
+        {type:'fill', q:'"Chim khôn kêu tiếng rảnh rang, người khôn nói tiếng dịu ___ dễ nghe"', opts:['dàng','nhẹ','êm','trong'], ans:'dàng'},
+        {type:'mc', q:'"Giặc đến nhà đàn bà cũng đánh" thể hiện điều gì?', opts:['Tinh thần yêu nước của phụ nữ','Phụ nữ mạnh hơn đàn ông','Không có đàn ông','Chiến tranh khốc liệt'], ans:'Tinh thần yêu nước của phụ nữ'},
+        {type:'fill', q:'"Trăm năm bia đá thì ___, ngàn năm bia miệng vẫn còn trơ trơ"', opts:['mòn','lở','vỡ','tan'], ans:'mòn'},
+        {type:'mc', q:'Tục ngữ "Gần mực thì đen, gần đèn thì rạng" có nghĩa?', opts:['Môi trường ảnh hưởng đến con người','Màu mực và ánh đèn','Cần học ban đêm','Tránh xa bóng tối'], ans:'Môi trường ảnh hưởng đến con người'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Thơ, tác phẩm văn học, tác giả nổi tiếng',
+      questions:[
+        {type:'fill', q:'"Việt Nam đất nước ta ơi, mênh mông biển lúa đâu ___ đẹp hơn"', opts:['trời','nơi','đâu','này'], ans:'trời'},
+        {type:'mc', q:'"Truyện Kiều" do ai sáng tác?', opts:['Nguyễn Du','Nguyễn Trãi','Hồ Xuân Hương','Đoàn Thị Điểm'], ans:'Nguyễn Du'},
+        {type:'fill', q:'"Quê hương là ___ diều biếc, tuổi thơ con thả trên đồng"', opts:['con','cánh','chiếc','sợi'], ans:'con'},
+        {type:'mc', q:'Bài thơ "Quê hương" nổi tiếng của nhà thơ nào?', opts:['Tế Hanh','Xuân Diệu','Huy Cận','Tố Hữu'], ans:'Tế Hanh'},
+        {type:'mc', q:'"Nam Quốc Sơn Hà" được coi là?', opts:['Bản tuyên ngôn độc lập đầu tiên của VN','Bài ca chiến thắng','Lời kêu gọi ra trận','Bài thơ tình'], ans:'Bản tuyên ngôn độc lập đầu tiên của VN'},
+        {type:'fill', q:'"Ngày hôm qua đâu rồi? Cô giáo tìm khắp ___, còn trong vở thơm tho"', opts:['nơi','chốn','lối','đây'], ans:'nơi'},
+        {type:'mc', q:'Tác giả bài thơ "Hạt gạo làng ta" là?', opts:['Trần Đăng Khoa','Tố Hữu','Xuân Quỳnh','Phạm Tiến Duật'], ans:'Trần Đăng Khoa'},
+        {type:'mc', q:'Thể thơ lục bát có số chữ trong mỗi cặp câu là?', opts:['6 và 8','5 và 7','4 và 6','7 và 7'], ans:'6 và 8'},
+        {type:'fill', q:'"Chú bé loắt choắt, cái ___ xinh xinh, cái chân thoăn thoắt"', opts:['xắc','túi','balo','đầu'], ans:'xắc'},
+        {type:'mc', q:'Bài thơ "Lượm" của ai?', opts:['Tố Hữu','Chính Hữu','Quang Dũng','Nguyễn Đình Thi'], ans:'Tố Hữu'},
+        {type:'mc', q:'Nguyễn Du sống vào triều đại nào?', opts:['Nhà Nguyễn','Nhà Lê','Nhà Trần','Nhà Lý'], ans:'Nhà Nguyễn'},
+        {type:'fill', q:'"Ai yêu nhi đồng bằng Bác ___ Minh"', opts:['Hồ','Chí','Hồ Chí','Hồ Văn'], ans:'Hồ'},
+        {type:'mc', q:'"Đất nước" là tác phẩm nổi tiếng của nhà thơ nào?', opts:['Nguyễn Khoa Điềm','Chế Lan Viên','Huy Cận','Xuân Diệu'], ans:'Nguyễn Khoa Điềm'},
+        {type:'mc', q:'Truyện ngắn "Tắt đèn" của ai?', opts:['Ngô Tất Tố','Nam Cao','Nguyên Hồng','Tô Hoài'], ans:'Ngô Tất Tố'},
+        {type:'fill', q:'"Ơi con chim chiền chiện, hót chi mà ___ vang trời"', opts:['vang','chi','hót','véo'], ans:'vang'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Phân tích tác phẩm, phong cách, giá trị nghệ thuật',
+      questions:[
+        {type:'mc', q:'Giá trị nhân đạo của "Truyện Kiều" thể hiện qua?', opts:['Đồng cảm với số phận người phụ nữ tài hoa bạc mệnh','Chỉ ca ngợi tình yêu','Phê phán Kiều','Chỉ tả thiên nhiên'], ans:'Đồng cảm với số phận người phụ nữ tài hoa bạc mệnh'},
+        {type:'mc', q:'Phép tu từ nào được dùng trong "Trường Sơn: Đông, Tây"?', opts:['Nhân hóa và điệp ngữ','Chỉ so sánh','Chỉ ẩn dụ','Không có phép tu từ'], ans:'Nhân hóa và điệp ngữ'},
+        {type:'mc', q:'Ý nghĩa hình ảnh "bông sen" trong ca dao VN thường là?', opts:['Sự thanh cao, trong sáng dù ở môi trường bùn lầy','Sự giàu có','Tình yêu lãng mạn','Thiên nhiên đẹp'], ans:'Sự thanh cao, trong sáng dù ở môi trường bùn lầy'},
+        {type:'mc', q:'Truyện Kiều gồm bao nhiêu câu thơ lục bát?', opts:['3.254','2.000','4.000','1.700'], ans:'3.254'},
+        {type:'mc', q:'Phong cách sáng tác của Tô Hoài nổi bật ở?', opts:['Miêu tả sinh động thế giới loài vật và trẻ em','Viết về chiến tranh','Thơ trữ tình','Chính luận'], ans:'Miêu tả sinh động thế giới loài vật và trẻ em'},
+        {type:'mc', q:'Biện pháp tu từ trong câu "Tre xanh xanh tự bao giờ" là?', opts:['Điệp từ','So sánh','Ẩn dụ','Hoán dụ'], ans:'Điệp từ'},
+        {type:'mc', q:'Nhân vật Thúy Kiều tiêu biểu cho kiểu nhân vật nào trong VH trung đại?', opts:['Người phụ nữ tài sắc vẹn toàn nhưng bạc mệnh','Người anh hùng','Quan lại tốt','Người bình thường'], ans:'Người phụ nữ tài sắc vẹn toàn nhưng bạc mệnh'},
+        {type:'mc', q:'Thể loại "truyện thơ Nôm" xuất hiện nhiều nhất vào thời?', opts:['Thế kỷ 18-19','Thế kỷ 15-16','Thế kỷ 10-11','Hiện đại'], ans:'Thế kỷ 18-19'},
+        {type:'mc', q:'Tác phẩm nào phản ánh cuộc sống nông dân VN trước Cách Mạng?', opts:['Tắt đèn (Ngô Tất Tố)','Dế Mèn phiêu lưu ký','Truyện Kiều','Lượm'], ans:'Tắt đèn (Ngô Tất Tố)'},
+        {type:'mc', q:'Ca dao "Công cha như núi..." sử dụng biện pháp tu từ gì?', opts:['So sánh','Nhân hóa','Điệp ngữ','Hoán dụ'], ans:'So sánh'},
+        {type:'mc', q:'Tính dân tộc trong văn học thể hiện qua?', opts:['Sử dụng ngôn ngữ dân tộc, phản ánh bản sắc văn hóa','Chỉ viết về anh hùng','Chỉ dùng chữ Nôm','Không vay mượn từ nước ngoài'], ans:'Sử dụng ngôn ngữ dân tộc, phản ánh bản sắc văn hóa'},
+        {type:'mc', q:'Hình ảnh "tre" trong thơ văn VN thường tượng trưng cho?', opts:['Phẩm chất kiên cường, bất khuất của con người VN','Sự giàu có','Thiên nhiên đẹp','Sự yếu đuối'], ans:'Phẩm chất kiên cường, bất khuất của con người VN'},
+        {type:'mc', q:'"Bình Ngô Đại Cáo" có ý nghĩa lịch sử văn học là?', opts:['Bản tuyên ngôn độc lập thứ 2, áng thiên cổ hùng văn','Chỉ là bài ca chiến thắng','Tác phẩm thơ trữ tình','Truyện kể về Lê Lợi'], ans:'Bản tuyên ngôn độc lập thứ 2, áng thiên cổ hùng văn'},
+        {type:'mc', q:'Văn học dân gian khác văn học viết ở điểm nào?', opts:['Truyền miệng, tác giả tập thể, không rõ nguồn gốc','Có tác giả cụ thể','Chỉ có thơ','Viết bằng chữ Nôm'], ans:'Truyền miệng, tác giả tập thể, không rõ nguồn gốc'},
+        {type:'mc', q:'Tại sao "Dế Mèn phiêu lưu ký" được dịch ra nhiều thứ tiếng?', opts:['Giá trị giáo dục nhân văn sâu sắc, hấp dẫn với trẻ em toàn cầu','Vì là sách giáo khoa','Vì tác giả nổi tiếng thế giới','Vì in nhiều nhất'], ans:'Giá trị giáo dục nhân văn sâu sắc, hấp dẫn với trẻ em toàn cầu'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

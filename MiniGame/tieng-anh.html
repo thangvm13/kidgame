@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>🔤 Tiếng Anh</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'english', name:'Tiếng Anh', emoji:'🔤', theme:'english-theme',
+  tagline:'Learn English every day! 🌍',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Từ vựng cơ bản: động vật, màu sắc, số đếm',
+      questions:[
+        {type:'mc', emoji:'🐱', q:'Con này tiếng Anh là gì?', opts:['cat','dog','bird','fish'], ans:'cat'},
+        {type:'mc', emoji:'🐶', q:'Con này tiếng Anh là gì?', opts:['dog','cat','horse','pig'], ans:'dog'},
+        {type:'mc', emoji:'🍎', q:'Quả này tiếng Anh là gì?', opts:['apple','orange','banana','grape'], ans:'apple'},
+        {type:'mc', emoji:'🟥', q:'Màu này tiếng Anh là gì?', opts:['red','blue','green','yellow'], ans:'red'},
+        {type:'mc', emoji:'🟦', q:'Màu này tiếng Anh là gì?', opts:['blue','red','pink','white'], ans:'blue'},
+        {type:'mc', q:'Số 7 tiếng Anh đọc là?', opts:['seven','eight','six','nine'], ans:'seven'},
+        {type:'mc', q:'Số 12 tiếng Anh đọc là?', opts:['twelve','eleven','thirteen','twenty'], ans:'twelve'},
+        {type:'mc', emoji:'🐘', q:'Con này tiếng Anh là gì?', opts:['elephant','lion','tiger','bear'], ans:'elephant'},
+        {type:'mc', emoji:'🌞', q:'Mặt trời tiếng Anh là?', opts:['sun','moon','star','cloud'], ans:'sun'},
+        {type:'fill', emoji:'🍌', q:'This is a ___.', opts:['banana','apple','cake','fish'], ans:'banana'},
+        {type:'fill', q:'I have two ___.', emoji:'👀', opts:['eyes','ears','nose','mouth'], ans:'eyes'},
+        {type:'mc', q:'"Xin chào" tiếng Anh là?', opts:['Hello','Goodbye','Thank you','Sorry'], ans:'Hello'},
+        {type:'mc', q:'"Cảm ơn" tiếng Anh là?', opts:['Thank you','Hello','Goodbye','Please'], ans:'Thank you'},
+        {type:'mc', emoji:'📚', q:'Quyển sách tiếng Anh là?', opts:['book','pen','ruler','bag'], ans:'book'},
+        {type:'mc', emoji:'✏️', q:'Cái bút chì tiếng Anh là?', opts:['pencil','pen','eraser','book'], ans:'pencil'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Câu đơn giản, present tense, nghề nghiệp',
+      questions:[
+        {type:'fill', q:'She ___ to school every day.', opts:['goes','go','going','went'], ans:'goes'},
+        {type:'fill', q:'They ___ soccer in the park.', opts:['play','plays','playing','played'], ans:'play'},
+        {type:'mc', q:'"Bác sĩ" tiếng Anh là?', opts:['doctor','teacher','farmer','driver'], ans:'doctor'},
+        {type:'mc', q:'"Giáo viên" tiếng Anh là?', opts:['teacher','doctor','nurse','engineer'], ans:'teacher'},
+        {type:'fill', q:'There are seven days in a ___.', opts:['week','month','year','day'], ans:'week'},
+        {type:'mc', q:'"Thứ Hai" tiếng Anh là?', opts:['Monday','Tuesday','Sunday','Wednesday'], ans:'Monday'},
+        {type:'fill', q:'I ___ breakfast at 7 o\'clock.', opts:['eat','eats','eating','ate'], ans:'eat'},
+        {type:'mc', q:'"Bơi lội" tiếng Anh là?', opts:['swim','run','jump','fly'], ans:'swim'},
+        {type:'mc', q:'"Mùa hè" tiếng Anh là?', opts:['summer','winter','spring','autumn'], ans:'summer'},
+        {type:'fill', q:'My father is a ___.', emoji:'👨‍🌾', opts:['farmer','doctor','teacher','cook'], ans:'farmer'},
+        {type:'mc', q:'"Trái tim" tiếng Anh là?', opts:['heart','head','hand','foot'], ans:'heart'},
+        {type:'fill', q:'I can ___ a bike.', opts:['ride','rides','riding','rode'], ans:'ride'},
+        {type:'mc', q:'Opposite of "big" is?', opts:['small','tall','long','heavy'], ans:'small'},
+        {type:'fill', q:'The sky is ___.', emoji:'☀️', opts:['blue','green','red','yellow'], ans:'blue'},
+        {type:'mc', q:'"12 tháng" = ?', opts:['one year','one month','one week','one day'], ans:'one year'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Thì quá khứ, tương lai, đọc hiểu đoạn văn ngắn',
+      questions:[
+        {type:'fill', q:'Yesterday, I ___ to the library.', opts:['went','go','goes','going'], ans:'went'},
+        {type:'fill', q:'She ___ a letter last night.', opts:['wrote','write','writes','writing'], ans:'wrote'},
+        {type:'fill', q:'Tomorrow we ___ visit grandma.', opts:['will','would','can','shall'], ans:'will'},
+        {type:'mc', q:'"Sang tuần" tiếng Anh là?', opts:['next week','last week','this week','every week'], ans:'next week'},
+        {type:'fill', q:'He ___ TV when I called him.', opts:['was watching','watched','watch','watches'], ans:'was watching'},
+        {type:'mc', q:'Câu nào đúng?', opts:['She doesn\'t like coffee.','She don\'t like coffee.','She not like coffee.','She isn\'t like coffee.'], ans:'She doesn\'t like coffee.'},
+        {type:'mc', q:'"How many" dùng để hỏi về?', opts:['Số lượng đếm được','Khối lượng','Thời gian','Giá tiền'], ans:'Số lượng đếm được'},
+        {type:'fill', q:'___ you like some water?', opts:['Would','Do','Are','Will'], ans:'Would'},
+        {type:'mc', q:'"Trước kia tôi đã sống ở Hà Nội" tiếng Anh là?', opts:['I used to live in Hanoi.','I live in Hanoi.','I will live in Hanoi.','I am living in Hanoi.'], ans:'I used to live in Hanoi.'},
+        {type:'fill', q:'My mother ___ cooking right now.', opts:['is','are','was','were'], ans:'is'},
+        {type:'mc', q:'Nghĩa của "hard-working" là?', opts:['Chăm chỉ','Thông minh','Thân thiện','Dũng cảm'], ans:'Chăm chỉ'},
+        {type:'fill', q:'I have lived here ___ 5 years.', opts:['for','since','ago','in'], ans:'for'},
+        {type:'mc', q:'Câu nào đúng ngữ pháp?', opts:['There are two cats.','There is two cats.','There were two cats.','There am two cats.'], ans:'There are two cats.'},
+        {type:'fill', q:'___ does she go to school?', opts:['How','What','Where','Why'], ans:'How'},
+        {type:'mc', q:'"Người thợ xây" tiếng Anh là?', opts:['builder','engineer','driver','farmer'], ans:'builder'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Ngữ pháp nâng cao, thành ngữ, đọc hiểu',
+      questions:[
+        {type:'mc', q:'Câu bị động của "Tom wrote this book" là?', opts:['This book was written by Tom.','This book is written by Tom.','This book wrote by Tom.','This book has written by Tom.'], ans:'This book was written by Tom.'},
+        {type:'fill', q:'If it ___ tomorrow, we will stay home.', opts:['rains','rain','rained','will rain'], ans:'rains'},
+        {type:'mc', q:'"It\'s raining cats and dogs" nghĩa là?', opts:['Trời mưa to','Mèo và chó bị mưa','Trời ít mưa','Động vật rơi từ trên cao'], ans:'Trời mưa to'},
+        {type:'fill', q:'She ___ already ___ her homework.', opts:['has / done','have / did','is / doing','was / done'], ans:'has / done'},
+        {type:'mc', q:'Từ nào là tính từ trong câu: "She sings beautifully"?', opts:['Không có tính từ','She','sings','beautifully'], ans:'Không có tính từ'},
+        {type:'fill', q:'He is ___ intelligent ___ his brother.', opts:['as / as','more / than','so / that','too / to'], ans:'as / as'},
+        {type:'mc', q:'Câu nào dùng thì hiện tại hoàn thành đúng?', opts:['I have visited Paris twice.','I visited Paris twice.','I have visit Paris twice.','I had visit Paris twice.'], ans:'I have visited Paris twice.'},
+        {type:'mc', q:'"Break a leg" nghĩa thực tế là?', opts:['Chúc may mắn','Gãy chân','Nhảy múa','Chạy nhanh'], ans:'Chúc may mắn'},
+        {type:'fill', q:'The book ___ I bought yesterday is interesting.', opts:['that','who','whom','whose'], ans:'that'},
+        {type:'mc', q:'Dạng so sánh nhất của "good" là?', opts:['best','better','most good','goodest'], ans:'best'},
+        {type:'fill', q:'She asked me where ___ from.', opts:['I was','was I','I am','am I'], ans:'I was'},
+        {type:'mc', q:'"On the other hand" dùng để?', opts:['Đối lập ý kiến','Thêm thông tin','Kết luận','Giải thích'], ans:'Đối lập ý kiến'},
+        {type:'fill', q:'The more you practice, the ___ you become.', opts:['better','best','good','well'], ans:'better'},
+        {type:'mc', q:'Câu điều kiện loại 2 dùng khi nào?', opts:['Giả định không thật hiện tại','Điều có thể xảy ra','Điều đã xảy ra','Điều chắc chắn'], ans:'Giả định không thật hiện tại'},
+        {type:'fill', q:'By 2030, electric cars ___ become very common.', opts:['will have','have','will','had'], ans:'will have'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>🔬 Khoa Học</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'science', name:'Khoa Học', emoji:'🔬', theme:'science-theme',
+  tagline:'Khám phá thế giới xung quanh! 🌏',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Cây cối, động vật, cơ thể người',
+      questions:[
+        {type:'mc', emoji:'🌱', q:'Cây cần gì để sống?', opts:['Nước, ánh sáng, không khí','Chỉ nước','Chỉ ánh sáng','Đất và muối'], ans:'Nước, ánh sáng, không khí'},
+        {type:'mc', emoji:'🫁', q:'Chúng ta thở bằng bộ phận nào?', opts:['Phổi','Tim','Dạ dày','Não'], ans:'Phổi'},
+        {type:'mc', emoji:'❤️', q:'Tim có chức năng gì?', opts:['Bơm máu đi khắp cơ thể','Tiêu hóa thức ăn','Lọc không khí','Tạo ra máu'], ans:'Bơm máu đi khắp cơ thể'},
+        {type:'mc', q:'Động vật nào đẻ trứng?', opts:['Gà','Chó','Mèo','Lợn'], ans:'Gà'},
+        {type:'mc', emoji:'🐛', q:'Con tằm biến thành gì?', opts:['Bướm','Ong','Ruồi','Kiến'], ans:'Bướm'},
+        {type:'mc', q:'Rễ cây có tác dụng gì?', opts:['Hút nước và chất dinh dưỡng','Hút ánh sáng','Tạo ra hạt','Tạo ra quả'], ans:'Hút nước và chất dinh dưỡng'},
+        {type:'mc', emoji:'🌿', q:'Lá cây có màu xanh vì chứa?', opts:['Diệp lục tố','Chất đường','Chất béo','Muối khoáng'], ans:'Diệp lục tố'},
+        {type:'mc', q:'Bộ phận nào giúp cây sinh sản?', opts:['Hoa','Lá','Thân','Rễ'], ans:'Hoa'},
+        {type:'mc', q:'Động vật nào là động vật có vú?', opts:['Cá voi','Cá mập','Rùa','Cá sấu'], ans:'Cá voi'},
+        {type:'mc', emoji:'🦷', q:'Chúng ta có mấy loại răng?', opts:['3 loại','2 loại','4 loại','1 loại'], ans:'3 loại'},
+        {type:'mc', q:'Cây hoa hướng dương hướng về phía?', opts:['Mặt trời','Mặt trăng','Gió','Nước'], ans:'Mặt trời'},
+        {type:'mc', q:'Chất nào giúp xương chắc khỏe?', opts:['Canxi','Sắt','Kẽm','Vitamin C'], ans:'Canxi'},
+        {type:'mc', emoji:'🧠', q:'Não người nặng khoảng bao nhiêu?', opts:['1,4 kg','0,5 kg','3 kg','2 kg'], ans:'1,4 kg'},
+        {type:'mc', q:'Động vật nào ngủ đông?', opts:['Gấu','Chó','Mèo','Ngựa'], ans:'Gấu'},
+        {type:'mc', q:'Loài nào sống được cả trên cạn và dưới nước?', opts:['Ếch','Cá','Rắn','Thỏ'], ans:'Ếch'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Nước, không khí, vật chất, năng lượng',
+      questions:[
+        {type:'mc', q:'Nước sôi ở bao nhiêu độ C?', opts:['100°C','90°C','80°C','120°C'], ans:'100°C'},
+        {type:'mc', q:'Nước đóng băng ở bao nhiêu độ C?', opts:['0°C','10°C','-10°C','5°C'], ans:'0°C'},
+        {type:'mc', q:'Không khí chiếm phần lớn là khí gì?', opts:['Nitơ','Oxy','CO₂','Hơi nước'], ans:'Nitơ'},
+        {type:'mc', q:'Loài thực vật nào không cần đất để sống?', opts:['Bèo','Xương rồng','Lúa','Ngô'], ans:'Bèo'},
+        {type:'mc', emoji:'🌡️', q:'Nhiệt kế dùng để đo gì?', opts:['Nhiệt độ','Áp suất','Khối lượng','Thể tích'], ans:'Nhiệt độ'},
+        {type:'mc', q:'Chất rắn, lỏng, khí là các?', opts:['Trạng thái của vật chất','Loại năng lượng','Loại kim loại','Dạng chuyển động'], ans:'Trạng thái của vật chất'},
+        {type:'mc', q:'Năng lượng mặt trời là loại năng lượng?', opts:['Tái tạo được','Không tái tạo','Hóa học','Hạt nhân'], ans:'Tái tạo được'},
+        {type:'mc', q:'Oxy chiếm bao nhiêu % không khí?', opts:['21%','78%','1%','50%'], ans:'21%'},
+        {type:'mc', emoji:'🌊', q:'Nước biển mặn vì chứa?', opts:['Muối','Đường','Khoáng chất','Axit'], ans:'Muối'},
+        {type:'mc', q:'Loại nhiên liệu nào thân thiện môi trường nhất?', opts:['Gió và mặt trời','Than đá','Dầu mỏ','Xăng'], ans:'Gió và mặt trời'},
+        {type:'mc', q:'Hiện tượng nước từ sông, biển bay lên gọi là?', opts:['Bay hơi','Đông đặc','Ngưng tụ','Tan chảy'], ans:'Bay hơi'},
+        {type:'mc', q:'Cây xanh thải ra khí gì trong quá trình quang hợp?', opts:['Oxy','CO₂','Nitơ','Hơi nước'], ans:'Oxy'},
+        {type:'mc', q:'Vật dẫn nhiệt tốt là?', opts:['Kim loại','Gỗ','Nhựa','Cao su'], ans:'Kim loại'},
+        {type:'mc', emoji:'🔋', q:'Pin lưu trữ loại năng lượng nào?', opts:['Điện năng','Nhiệt năng','Quang năng','Cơ năng'], ans:'Điện năng'},
+        {type:'mc', q:'Hiện tượng nào xảy ra khi đun nóng kim loại?', opts:['Giãn nở','Thu hẹp','Đổi màu','Tan chảy ngay'], ans:'Giãn nở'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Ánh sáng, âm thanh, điện, từ trường',
+      questions:[
+        {type:'mc', q:'Ánh sáng di chuyển với vận tốc khoảng?', opts:['300.000 km/s','30.000 km/s','3.000 km/s','30 km/s'], ans:'300.000 km/s'},
+        {type:'mc', q:'Âm thanh truyền nhanh nhất trong môi trường nào?', opts:['Chất rắn','Chất lỏng','Chất khí','Chân không'], ans:'Chất rắn'},
+        {type:'mc', q:'Ánh sáng trắng khi qua lăng kính phân thành?', opts:['7 màu cầu vồng','3 màu','5 màu','Không đổi'], ans:'7 màu cầu vồng'},
+        {type:'mc', q:'Vật nào không dẫn điện?', opts:['Nhựa','Đồng','Nhôm','Sắt'], ans:'Nhựa'},
+        {type:'mc', emoji:'🧲', q:'Nam châm hút vật nào?', opts:['Sắt, thép, niken','Nhôm, đồng, vàng','Nhựa, gỗ, cao su','Tất cả kim loại'], ans:'Sắt, thép, niken'},
+        {type:'mc', q:'Hiện tượng nguyệt thực xảy ra khi?', opts:['Trái Đất che khuất ánh sáng chiếu vào Mặt Trăng','Mặt Trăng che khuất Mặt Trời','Mặt Trời tắt','Mây che khuất Mặt Trăng'], ans:'Trái Đất che khuất ánh sáng chiếu vào Mặt Trăng'},
+        {type:'mc', q:'Để tiết kiệm điện, ta nên?', opts:['Tắt thiết bị khi không dùng','Bật thêm đèn cho sáng','Để TV chạy cả ngày','Dùng nhiều quạt cùng lúc'], ans:'Tắt thiết bị khi không dùng'},
+        {type:'mc', q:'Kính lúp làm tăng?', opts:['Kích thước ảnh của vật','Khối lượng vật','Nhiệt độ vật','Tốc độ ánh sáng'], ans:'Kích thước ảnh của vật'},
+        {type:'mc', q:'Cầu vồng xuất hiện sau cơn mưa vì?', opts:['Ánh sáng khúc xạ qua hơi nước','Hơi nước tạo màu','Ánh sáng phản chiếu đất','Mây tạo màu sắc'], ans:'Ánh sáng khúc xạ qua hơi nước'},
+        {type:'mc', q:'Hiện tượng sét là do?', opts:['Điện tích tích tụ trong mây phóng xuống đất','Mưa lớn','Gió mạnh','Mây va chạm nhau'], ans:'Điện tích tích tụ trong mây phóng xuống đất'},
+        {type:'mc', q:'Ống nhòm dùng nguyên lý?', opts:['Phản xạ ánh sáng','Khúc xạ âm thanh','Từ trường','Điện từ'], ans:'Phản xạ ánh sáng'},
+        {type:'mc', q:'Sóng âm không truyền được trong?', opts:['Chân không','Không khí','Nước','Kim loại'], ans:'Chân không'},
+        {type:'mc', q:'Hai cực cùng tên của nam châm sẽ?', opts:['Đẩy nhau','Hút nhau','Không tác dụng','Dính vào nhau'], ans:'Đẩy nhau'},
+        {type:'mc', q:'Dụng cụ đo cường độ dòng điện là?', opts:['Ampe kế','Vôn kế','Nhiệt kế','Đồng hồ'], ans:'Ampe kế'},
+        {type:'mc', q:'Pin điện hóa học biến đổi?', opts:['Hóa năng thành điện năng','Điện năng thành nhiệt năng','Quang năng thành điện năng','Cơ năng thành điện năng'], ans:'Hóa năng thành điện năng'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Môi trường, vũ trụ, hệ sinh thái',
+      questions:[
+        {type:'mc', q:'Trái Đất quay quanh Mặt Trời hết bao lâu?', opts:['365,25 ngày','365 ngày','360 ngày','366 ngày'], ans:'365,25 ngày'},
+        {type:'mc', q:'Hành tinh lớn nhất hệ Mặt Trời là?', opts:['Sao Mộc','Sao Thổ','Trái Đất','Sao Hỏa'], ans:'Sao Mộc'},
+        {type:'mc', q:'Ô nhiễm không khí chủ yếu do?', opts:['Khí thải công nghiệp và giao thông','Hơi nước','Mây','Gió'], ans:'Khí thải công nghiệp và giao thông'},
+        {type:'mc', q:'Chuỗi thức ăn nào đúng?', opts:['Cỏ → Thỏ → Cáo → Vi khuẩn','Cáo → Thỏ → Cỏ','Vi khuẩn → Cáo → Thỏ → Cỏ','Thỏ → Cỏ → Cáo'], ans:'Cỏ → Thỏ → Cáo → Vi khuẩn'},
+        {type:'mc', q:'Tầng ozon có vai trò?', opts:['Lọc tia cực tím từ Mặt Trời','Tạo ra oxy','Giữ nhiệt Trái Đất','Tạo ra mưa'], ans:'Lọc tia cực tím từ Mặt Trời'},
+        {type:'mc', q:'Hiệu ứng nhà kính gây ra?', opts:['Trái Đất nóng lên','Trái Đất lạnh đi','Mưa nhiều hơn','Gió mạnh hơn'], ans:'Trái Đất nóng lên'},
+        {type:'mc', q:'Nước chiếm bao nhiêu % bề mặt Trái Đất?', opts:['71%','50%','85%','60%'], ans:'71%'},
+        {type:'mc', q:'Đa dạng sinh học có nghĩa là?', opts:['Sự phong phú của các loài sinh vật','Chỉ nhiều loài thực vật','Chỉ nhiều loài động vật','Môi trường sạch'], ans:'Sự phong phú của các loài sinh vật'},
+        {type:'mc', q:'Loài nào đang có nguy cơ tuyệt chủng?', opts:['Hổ Đông Dương','Gà rừng','Cá chép','Ếch đồng'], ans:'Hổ Đông Dương'},
+        {type:'mc', q:'Tái chế rác thải có lợi ích gì?', opts:['Giảm ô nhiễm, tiết kiệm tài nguyên','Làm tăng rác','Gây ô nhiễm nước','Không có ích'], ans:'Giảm ô nhiễm, tiết kiệm tài nguyên'},
+        {type:'mc', q:'Mưa axit được tạo ra từ?', opts:['SO₂ và NO₂ trong không khí','CO₂ thuần túy','Hơi nước biển','Khói bếp'], ans:'SO₂ và NO₂ trong không khí'},
+        {type:'mc', q:'Trái Đất nằm ở vị trí thứ mấy tính từ Mặt Trời?', opts:['Thứ 3','Thứ 2','Thứ 4','Thứ 1'], ans:'Thứ 3'},
+        {type:'mc', q:'Sinh vật phân giải trong hệ sinh thái có vai trò?', opts:['Phân hủy xác sinh vật thành chất vô cơ','Tạo ra chất hữu cơ','Quang hợp','Ăn thực vật'], ans:'Phân hủy xác sinh vật thành chất vô cơ'},
+        {type:'mc', q:'Nước ngầm được hình thành do?', opts:['Nước mưa thấm qua đất đá','Sông chảy vào lòng đất','Tuyết tan','Hơi nước ngưng tụ'], ans:'Nước mưa thấm qua đất đá'},
+        {type:'mc', q:'Thực vật nào có thể sống trong sa mạc khô hạn?', opts:['Xương rồng','Lúa nước','Bèo tấm','Rong biển'], ans:'Xương rồng'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

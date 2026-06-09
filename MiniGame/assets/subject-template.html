@@ -1,0 +1,66 @@
+<!-- SUBJECT PAGE TEMPLATE — not a real page, just reference -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>TITLE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast">
+  <span class="toast-ico" id="toast-ico">✅</span>
+  <div class="toast-main" id="toast-main"></div>
+  <div class="toast-sub"  id="toast-sub"></div>
+</div>
+<div class="app">
+  <!-- LEVEL SELECT -->
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub"   id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <!-- GAME -->
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <!-- RESULTS -->
+  <div class="screen" id="screen-results">
+    <div class="hbar" style="margin-bottom:0">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <a href="index.html" class="btn-back">🏠 Home</a>
+    </div>
+    <div class="result-card">
+      <span class="r-ico"   id="r-ico">🏆</span>
+      <h2  class="r-title"  id="r-title"></h2>
+      <div class="r-score"  id="r-score"></div>
+      <div class="r-stars"  id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span>  <small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary"   onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>window.SUBJECT = SUBJECT_DATA_HERE;</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>🔢 Toán Học</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'math', name:'Toán Học', emoji:'🔢', theme:'math-theme',
+  tagline:'Luyện tính toán thật nhanh! ⚡',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Cộng trừ trong phạm vi 10.000',
+      questions:[
+        {type:'calc', q:'1.245 + 532 = ?',      ans:'1777'},
+        {type:'calc', q:'3.600 - 1.250 = ?',     ans:'2350'},
+        {type:'calc', q:'425 + 374 = ?',          ans:'799'},
+        {type:'calc', q:'2.000 - 865 = ?',        ans:'1135'},
+        {type:'calc', q:'6 × 7 = ?',              ans:'42'},
+        {type:'calc', q:'9 × 8 = ?',              ans:'72'},
+        {type:'calc', q:'56 ÷ 8 = ?',             ans:'7'},
+        {type:'calc', q:'72 ÷ 9 = ?',             ans:'8'},
+        {type:'mc',q:'Số nào lớn nhất?', opts:['3.456','3.645','3.564','3.465'], ans:'3.645'},
+        {type:'mc',q:'4.800 + ? = 7.000', opts:['2.200','2.100','2.300','1.900'], ans:'2.200'},
+        {type:'calc', q:'35 × 2 = ?',             ans:'70'},
+        {type:'calc', q:'48 ÷ 6 = ?',             ans:'8'},
+        {type:'mc',q:'Kết quả của 250 × 4 là?', opts:['1.000','900','1.100','800'], ans:'1.000'},
+        {type:'mc',q:'Số liền sau của 9.999 là?', opts:['10.000','10.001','9.998','10.100'], ans:'10.000'},
+        {type:'calc', q:'7 × 8 = ?',              ans:'56'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Nhân chia nhiều chữ số, tìm x',
+      questions:[
+        {type:'calc', q:'125 × 4 = ?',            ans:'500'},
+        {type:'calc', q:'252 × 3 = ?',            ans:'756'},
+        {type:'calc', q:'840 ÷ 4 = ?',            ans:'210'},
+        {type:'calc', q:'756 ÷ 3 = ?',            ans:'252'},
+        {type:'mc',q:'x + 245 = 600. Tìm x?', opts:['355','345','365','375'], ans:'355'},
+        {type:'mc',q:'x × 5 = 425. Tìm x?',  opts:['85','75','95','80'],    ans:'85'},
+        {type:'mc',q:'Tích của 36 và 25 là?', opts:['900','800','910','850'], ans:'900'},
+        {type:'mc',q:'1.728 ÷ 4 = ?',         opts:['432','452','442','462'], ans:'432'},
+        {type:'calc', q:'34 × 25 = ?',            ans:'850'},
+        {type:'calc', q:'625 ÷ 5 = ?',            ans:'125'},
+        {type:'mc',q:'Số dư của 575 ÷ 6 là?', opts:['5','4','3','2'],        ans:'5'},
+        {type:'mc',q:'245 × ? = 1.225',        opts:['5','4','6','7'],         ans:'5'},
+        {type:'calc', q:'108 × 6 = ?',            ans:'648'},
+        {type:'mc',q:'2.400 ÷ 8 = ?',         opts:['300','280','320','350'], ans:'300'},
+        {type:'mc',q:'x - 378 = 244. Tìm x?', opts:['622','612','632','642'], ans:'622'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Phân số, chu vi, diện tích hình học',
+      questions:[
+        {type:'mc',q:'Phân số nào lớn hơn: 3/5 hay 2/3?', opts:['2/3','3/5','Bằng nhau','Không so được'], ans:'2/3'},
+        {type:'mc',q:'1/2 + 1/4 = ?',          opts:['3/4','2/6','1/3','2/4'],   ans:'3/4'},
+        {type:'mc',q:'3/4 - 1/4 = ?',          opts:['2/4','1/2','2/8','1/4'],   ans:'2/4'},
+        {type:'mc',q:'Chu vi hình vuông cạnh 8cm là?', opts:['32cm','24cm','40cm','16cm'], ans:'32cm'},
+        {type:'mc',q:'Diện tích hình chữ nhật dài 12cm, rộng 5cm là?', opts:['60cm²','34cm²','70cm²','50cm²'], ans:'60cm²'},
+        {type:'mc',q:'1/3 của 90 là?',         opts:['30','45','20','60'],        ans:'30'},
+        {type:'mc',q:'Chu vi hình chữ nhật dài 15m, rộng 8m là?', opts:['46m','30m','23m','60m'], ans:'46m'},
+        {type:'mc',q:'3/8 + 1/8 = ?',          opts:['4/8','4/16','2/4','1/2'],  ans:'4/8'},
+        {type:'mc',q:'Diện tích hình vuông cạnh 9cm là?', opts:['81cm²','36cm²','72cm²','45cm²'], ans:'81cm²'},
+        {type:'mc',q:'5/6 - 2/6 = ?',          opts:['3/6','3/12','1/2','7/6'],  ans:'3/6'},
+        {type:'mc',q:'1/4 của 120 là?',         opts:['30','40','20','60'],        ans:'30'},
+        {type:'mc',q:'Góc vuông có số đo là?', opts:['90°','180°','60°','45°'],   ans:'90°'},
+        {type:'mc',q:'2/5 + 1/5 = ?',           opts:['3/5','3/10','1/2','4/5'], ans:'3/5'},
+        {type:'mc',q:'Hình thang có mấy cạnh?', opts:['4','3','5','6'],           ans:'4'},
+        {type:'mc',q:'Diện tích hình vuông cạnh 7dm là?', opts:['49dm²','28dm²','56dm²','42dm²'], ans:'49dm²'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Bài toán có lời văn, phân số nâng cao',
+      questions:[
+        {type:'mc',q:'Một lớp có 32 HS, trong đó 3/8 số HS là HS giỏi. Có bao nhiêu HS giỏi?', opts:['12','8','16','10'], ans:'12'},
+        {type:'mc',q:'Bể chứa 450 lít nước. Bơm ra 2/5. Còn lại bao nhiêu lít?', opts:['270','180','225','200'], ans:'270'},
+        {type:'mc',q:'5/6 của 120 là?',         opts:['100','90','80','110'],      ans:'100'},
+        {type:'mc',q:'Nam đọc 3/7 quyển sách 210 trang. Nam đọc bao nhiêu trang?', opts:['90','70','80','100'], ans:'90'},
+        {type:'mc',q:'Trung bình cộng của 45, 67, 53 là?', opts:['55','60','50','65'], ans:'55'},
+        {type:'mc',q:'Một HCN có chu vi 56cm, chiều dài 16cm. Chiều rộng là?', opts:['12cm','14cm','10cm','20cm'], ans:'12cm'},
+        {type:'mc',q:'Giá 1kg táo là 25.000đ. Mua 1,5kg hết bao nhiêu?', opts:['37.500đ','35.000đ','40.000đ','30.000đ'], ans:'37.500đ'},
+        {type:'mc',q:'3/4 + 5/8 = ?',           opts:['11/8','8/12','1','9/8'],    ans:'11/8'},
+        {type:'mc',q:'Số nào chia hết cho cả 2 và 3?', opts:['18','16','14','22'], ans:'18'},
+        {type:'mc',q:'Cửa hàng có 1.200 quyển vở, đã bán 5/8. Còn lại bao nhiêu?', opts:['450','350','400','500'], ans:'450'},
+        {type:'mc',q:'Tìm x: 3×x + 15 = 48',   opts:['11','9','10','12'],          ans:'11'},
+        {type:'mc',q:'Diện tích tam giác có đáy 14cm, cao 10cm là?', opts:['70cm²','140cm²','100cm²','56cm²'], ans:'70cm²'},
+        {type:'mc',q:'7/10 - 3/5 = ?',          opts:['1/10','4/5','2/10','1/5'],  ans:'1/10'},
+        {type:'mc',q:'Một tàu lửa đi 240km trong 3 giờ. Vận tốc là?', opts:['80km/h','70km/h','90km/h','60km/h'], ans:'80km/h'},
+        {type:'mc',q:'Có 4 túi, mỗi túi 125 viên bi. Tất cả có bao nhiêu viên?', opts:['500','450','480','520'], ans:'500'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>

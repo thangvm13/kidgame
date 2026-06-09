@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>🏛️ Lịch Sử</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="cf-wrap"></div>
+<div class="toast" id="toast"><span class="toast-ico" id="toast-ico">✅</span><div class="toast-main" id="toast-main"></div><div class="toast-sub" id="toast-sub"></div></div>
+<div class="app">
+  <div class="screen" id="screen-level">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <a href="index.html" class="btn-back">← Trang chủ</a>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="level-hero">
+      <span class="level-emoji" id="lv-emoji"></span>
+      <h1 class="level-title" id="lv-title"></h1>
+      <p class="level-sub" id="lv-sub"></p>
+    </div>
+    <div class="level-cards" id="level-cards"></div>
+  </div>
+  <div class="screen" id="screen-game">
+    <div class="hbar">
+      <button class="btn-back" onclick="G.home()">← Cấp độ</button>
+      <div class="star-badge">⭐ <span id="g-score">0</span></div>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="q-card" id="q-card"></div>
+    <div id="ans-area"></div>
+  </div>
+  <div class="screen" id="screen-results">
+    <div class="hbar"><button class="btn-back" onclick="G.home()">← Cấp độ</button><a href="index.html" class="btn-back">🏠 Home</a></div>
+    <div class="result-card">
+      <span class="r-ico" id="r-ico">🏆</span>
+      <h2 class="r-title" id="r-title"></h2>
+      <div class="r-score" id="r-score"></div>
+      <div class="r-stars" id="r-stars"></div>
+      <div class="r-breakdown">
+        <div class="r-stat"><span id="r-correct">0</span><small>Đúng ✅</small></div>
+        <div class="r-stat"><span id="r-wrong">0</span><small>Sai ❌</small></div>
+      </div>
+      <p class="r-msg" id="r-msg"></p>
+      <button class="btn-primary" onclick="G.replay()">🔄 Chơi lại</button>
+      <button class="btn-secondary" onclick="G.home()">📋 Chọn cấp độ</button>
+      <a href="index.html"><button class="btn-secondary" style="margin-top:4px">🏠 Trang chủ</button></a>
+    </div>
+  </div>
+</div>
+<script>
+window.SUBJECT = {
+  id:'history', name:'Lịch Sử', emoji:'🏛️', theme:'history-theme',
+  tagline:'Tự hào lịch sử Việt Nam! 🇻🇳',
+  levels:[
+    {
+      id:'easy', icon:'🌱', name:'Dễ', desc:'Anh hùng dân tộc nổi tiếng',
+      questions:[
+        {type:'mc', emoji:'👸', q:'Hai Bà Trưng khởi nghĩa chống lại ai?', opts:['Nhà Hán','Nhà Minh','Nhà Nguyên','Nhà Thanh'], ans:'Nhà Hán'},
+        {type:'mc', emoji:'⚔️', q:'Trần Hưng Đạo nổi tiếng với chiến thắng nào?', opts:['Chống quân Nguyên-Mông','Chống quân Hán','Chống quân Minh','Chống quân Thanh'], ans:'Chống quân Nguyên-Mông'},
+        {type:'mc', q:'Lý Thường Kiệt viết bài thơ nổi tiếng nào?', opts:['Nam Quốc Sơn Hà','Bình Ngô Đại Cáo','Hịch Tướng Sĩ','Dụ Chư Tỳ Tướng'], ans:'Nam Quốc Sơn Hà'},
+        {type:'mc', emoji:'🏯', q:'Kinh đô Thăng Long được lập bởi vua nào?', opts:['Lý Thái Tổ','Lý Thái Tông','Trần Thái Tông','Lê Thái Tổ'], ans:'Lý Thái Tổ'},
+        {type:'mc', q:'Bác Hồ đọc Tuyên Ngôn Độc Lập ngày nào?', opts:['2/9/1945','30/4/1975','19/8/1945','7/5/1954'], ans:'2/9/1945'},
+        {type:'mc', emoji:'🎖️', q:'Võ Nguyên Giáp nổi tiếng với chiến thắng nào?', opts:['Điện Biên Phủ','Bạch Đằng','Chi Lăng','Đống Đa'], ans:'Điện Biên Phủ'},
+        {type:'mc', q:'Nguyễn Huệ lên ngôi hoàng đế với hiệu là?', opts:['Quang Trung','Gia Long','Minh Mạng','Thiệu Trị'], ans:'Quang Trung'},
+        {type:'mc', q:'Chiến thắng Bạch Đằng năm 938 do ai lãnh đạo?', opts:['Ngô Quyền','Lý Thường Kiệt','Trần Hưng Đạo','Lê Lợi'], ans:'Ngô Quyền'},
+        {type:'mc', emoji:'👑', q:'Nhà Lý trị vì từ năm?', opts:['1010-1225','939-1009','1225-1400','1428-1527'], ans:'1010-1225'},
+        {type:'mc', q:'Lê Lợi lãnh đạo cuộc khởi nghĩa nào?', opts:['Lam Sơn','Tây Sơn','Yên Thế','Hương Khê'], ans:'Lam Sơn'},
+        {type:'mc', q:'Ngô Quyền đánh bại quân Nam Hán trên sông nào?', opts:['Bạch Đằng','Hồng','Mã','Đà'], ans:'Bạch Đằng'},
+        {type:'mc', q:'Đinh Bộ Lĩnh thống nhất đất nước, lập ra?', opts:['Nhà Đinh','Nhà Lý','Nhà Tiền Lê','Nhà Lê Sơ'], ans:'Nhà Đinh'},
+        {type:'mc', q:'Trần Quốc Tuấn là ai?', opts:['Trần Hưng Đạo','Trần Nhân Tông','Trần Thánh Tông','Trần Thái Tông'], ans:'Trần Hưng Đạo'},
+        {type:'mc', q:'Năm 1975, sự kiện lịch sử quan trọng nhất là?', opts:['Giải phóng miền Nam','Kháng chiến chống Pháp','Cách mạng tháng 8','Chiến thắng Điện Biên Phủ'], ans:'Giải phóng miền Nam'},
+        {type:'mc', q:'Thành Cổ Loa do ai xây dựng?', opts:['Thục Phán (An Dương Vương)','Hùng Vương','Lý Thái Tổ','Ngô Quyền'], ans:'Thục Phán (An Dương Vương)'},
+      ]
+    },
+    {
+      id:'medium', icon:'🌿', name:'Trung Bình', desc:'Các triều đại phong kiến Việt Nam',
+      questions:[
+        {type:'mc', q:'Triều đại nào kéo dài nhất trong lịch sử Việt Nam?', opts:['Nhà Lê','Nhà Nguyễn','Nhà Lý','Nhà Trần'], ans:'Nhà Lê'},
+        {type:'mc', q:'Nhà Nguyễn được thành lập năm nào?', opts:['1802','1788','1777','1820'], ans:'1802'},
+        {type:'mc', q:'Vua cuối cùng của nhà Nguyễn là?', opts:['Bảo Đại','Khải Định','Duy Tân','Thành Thái'], ans:'Bảo Đại'},
+        {type:'mc', q:'Cuộc khởi nghĩa Tây Sơn do ai lãnh đạo?', opts:['Nguyễn Huệ','Nguyễn Ánh','Lê Chiêu Thống','Nguyễn Nhạc'], ans:'Nguyễn Huệ'},
+        {type:'mc', q:'Nhà Trần chống quân Nguyên Mông thắng mấy lần?', opts:['3','2','4','1'], ans:'3'},
+        {type:'mc', q:'Lê Lợi lập ra nhà Lê năm bao nhiêu?', opts:['1428','1407','1418','1400'], ans:'1428'},
+        {type:'mc', q:'Triều Nguyễn đặt kinh đô ở đâu?', opts:['Huế','Thăng Long','Hoa Lư','Phú Xuân'], ans:'Huế'},
+        {type:'mc', q:'Nhà Trần trị vì từ năm nào đến năm nào?', opts:['1225-1400','1010-1225','1428-1527','1009-1225'], ans:'1225-1400'},
+        {type:'mc', q:'Nguyễn Trãi viết tác phẩm nào nổi tiếng?', opts:['Bình Ngô Đại Cáo','Nam Quốc Sơn Hà','Hịch Tướng Sĩ','Truyện Kiều'], ans:'Bình Ngô Đại Cáo'},
+        {type:'mc', q:'Thời Hùng Vương, nước ta tên là?', opts:['Văn Lang','Âu Lạc','Đại Cồ Việt','Đại Việt'], ans:'Văn Lang'},
+        {type:'mc', q:'Chữ Nôm được sáng tạo vào thời nào?', opts:['Nhà Lý - Nhà Trần','Nhà Đinh','Nhà Nguyễn','Thời Hùng Vương'], ans:'Nhà Lý - Nhà Trần'},
+        {type:'mc', q:'Năm 1054, nước ta đổi tên thành?', opts:['Đại Việt','Đại Cồ Việt','Văn Lang','Đại Nam'], ans:'Đại Việt'},
+        {type:'mc', q:'Hịch Tướng Sĩ do ai viết?', opts:['Trần Hưng Đạo','Lý Thường Kiệt','Nguyễn Trãi','Ngô Sĩ Liên'], ans:'Trần Hưng Đạo'},
+        {type:'mc', q:'Đại Việt Sử Ký Toàn Thư do ai biên soạn?', opts:['Ngô Sĩ Liên','Lê Văn Hưu','Nguyễn Trãi','Lê Quý Đôn'], ans:'Ngô Sĩ Liên'},
+        {type:'mc', q:'Cách mạng tháng Tám năm 1945 thành công, ai đứng đầu chính phủ mới?', opts:['Hồ Chí Minh','Trường Chinh','Võ Nguyên Giáp','Phạm Văn Đồng'], ans:'Hồ Chí Minh'},
+      ]
+    },
+    {
+      id:'hard', icon:'🌳', name:'Khó', desc:'Sự kiện, niên đại, nguyên nhân - kết quả',
+      questions:[
+        {type:'mc', q:'Chiến thắng Điện Biên Phủ xảy ra ngày?', opts:['7/5/1954','2/9/1945','30/4/1975','19/12/1946'], ans:'7/5/1954'},
+        {type:'mc', q:'Nguyên nhân chính dẫn đến mất nước vào tay nhà Minh là?', opts:['Nhà Hồ cướp ngôi, mất lòng dân','Quân quá yếu','Thiếu lương thực','Thiên tai'], ans:'Nhà Hồ cướp ngôi, mất lòng dân'},
+        {type:'mc', q:'Chiến lược "Chiến tranh đặc biệt" của Mỹ thất bại sau trận?', opts:['Ấp Bắc (1963)','Điện Biên Phủ','Khe Sanh','Tổng tiến công Mậu Thân'], ans:'Ấp Bắc (1963)'},
+        {type:'mc', q:'Nhà Hán đô hộ nước ta trong bao nhiêu năm?', opts:['Khoảng 1.000 năm','200 năm','500 năm','100 năm'], ans:'Khoảng 1.000 năm'},
+        {type:'mc', q:'Cuộc kháng chiến chống Pháp kết thúc năm nào?', opts:['1954','1945','1975','1950'], ans:'1954'},
+        {type:'mc', q:'Hội Nghị Genève 1954 chia đôi Việt Nam tại vĩ tuyến?', opts:['17','16','18','15'], ans:'17'},
+        {type:'mc', q:'Vua Quang Trung đại phá quân Thanh vào dịp lễ gì?', opts:['Tết Kỷ Dậu (1789)','Tết Mậu Tuất','Lễ hội mùa xuân','Giỗ tổ Hùng Vương'], ans:'Tết Kỷ Dậu (1789)'},
+        {type:'mc', q:'Phong trào Đồng Khởi (1960) bùng nổ ở đâu?', opts:['Bến Tre','Hà Nội','Huế','Quảng Ngãi'], ans:'Bến Tre'},
+        {type:'mc', q:'Hiệp định Paris ký năm nào?', opts:['1973','1954','1975','1969'], ans:'1973'},
+        {type:'mc', q:'Trận Bạch Đằng năm 1288 do ai chỉ huy?', opts:['Trần Hưng Đạo','Ngô Quyền','Lý Thường Kiệt','Lê Lợi'], ans:'Trần Hưng Đạo'},
+        {type:'mc', q:'Đảng Cộng sản Việt Nam thành lập năm nào?', opts:['1930','1925','1945','1935'], ans:'1930'},
+        {type:'mc', q:'Nhà Lý chuyển kinh đô từ Hoa Lư ra Thăng Long năm?', opts:['1010','1009','1225','1054'], ans:'1010'},
+        {type:'mc', q:'Khởi nghĩa Yên Thế do ai lãnh đạo?', opts:['Hoàng Hoa Thám','Phan Đình Phùng','Nguyễn Thiện Thuật','Tôn Thất Thuyết'], ans:'Hoàng Hoa Thám'},
+        {type:'mc', q:'Năm 179 TCN, Âu Lạc mất vào tay?', opts:['Triệu Đà','Hán Vũ Đế','Lưu Bang','Tần Thủy Hoàng'], ans:'Triệu Đà'},
+        {type:'mc', q:'Chiến dịch Hồ Chí Minh kết thúc ngày?', opts:['30/4/1975','2/9/1945','7/5/1954','20/7/1954'], ans:'30/4/1975'},
+      ]
+    },
+    {
+      id:'expert', icon:'🏔️', name:'Rất Khó', desc:'Phân tích, so sánh, lịch sử chuyên sâu',
+      questions:[
+        {type:'mc', q:'Thời kỳ Bắc thuộc kéo dài từ năm nào đến năm nào?', opts:['179 TCN - 938','111 TCN - 939','207 TCN - 938','100 TCN - 938'], ans:'179 TCN - 938'},
+        {type:'mc', q:'Chính sách "đồng hóa" của phong kiến phương Bắc nhằm?', opts:['Xóa bỏ bản sắc văn hóa Việt','Phát triển kinh tế','Truyền bá Phật giáo','Xây dựng đường sá'], ans:'Xóa bỏ bản sắc văn hóa Việt'},
+        {type:'mc', q:'Ý nghĩa của Chiến thắng Bạch Đằng 938 là?', opts:['Chấm dứt 1000 năm Bắc thuộc, mở ra kỷ nguyên độc lập','Thống nhất đất nước','Lập ra triều đại mới','Đánh bại quân Nguyên'], ans:'Chấm dứt 1000 năm Bắc thuộc, mở ra kỷ nguyên độc lập'},
+        {type:'mc', q:'Điểm khác nhau giữa cuộc kháng chiến chống Pháp và chống Mỹ là?', opts:['Chống Mỹ kéo dài hơn và vũ khí hiện đại hơn','Chống Pháp có nhiều thắng lợi hơn','Chống Mỹ không có sự ủng hộ quốc tế','Giống nhau hoàn toàn'], ans:'Chống Mỹ kéo dài hơn và vũ khí hiện đại hơn'},
+        {type:'mc', q:'Nguyên nhân sâu xa dẫn đến sự sụp đổ của nhà Hồ là?', opts:['Cướp ngôi bất hợp pháp, chính sách cứng nhắc mất lòng dân','Quân sự yếu kém','Kinh tế khủng hoảng','Thiên tai liên tiếp'], ans:'Cướp ngôi bất hợp pháp, chính sách cứng nhắc mất lòng dân'},
+        {type:'mc', q:'Bản "Tuyên ngôn Độc lập" 1945 của Bác Hồ trích dẫn từ?', opts:['Tuyên ngôn Mỹ và Pháp','Chỉ Tuyên ngôn Mỹ','Tuyên ngôn Liên Xô','Hiến chương Liên Hợp Quốc'], ans:'Tuyên ngôn Mỹ và Pháp'},
+        {type:'mc', q:'Yếu tố nào giúp quân dân ta chiến thắng quân Nguyên Mông 3 lần?', opts:['Đoàn kết, địa hình, chiến thuật đúng đắn','Vũ khí tốt hơn','Dân số đông hơn','Quân Nguyên tự rút lui'], ans:'Đoàn kết, địa hình, chiến thuật đúng đắn'},
+        {type:'mc', q:'Tại sao Lý Thái Tổ dời đô từ Hoa Lư ra Thăng Long?', opts:['Đất rộng, vị trí trung tâm, thuận tiện giao thông','Hoa Lư quá lạnh','Thăng Long gần biển hơn','Yêu cầu của dân'], ans:'Đất rộng, vị trí trung tâm, thuận tiện giao thông'},
+        {type:'mc', q:'Nhận xét về chính sách trọng nông của các triều đại phong kiến VN?', opts:['Phản ánh nền kinh tế nông nghiệp là chủ đạo','Bỏ qua thương mại','Chỉ quan tâm địa chủ','Gây thiệt hại kinh tế'], ans:'Phản ánh nền kinh tế nông nghiệp là chủ đạo'},
+        {type:'mc', q:'Tại sao nói chiến thắng Điện Biên Phủ có ý nghĩa quốc tế lớn?', opts:['Cổ vũ phong trào giải phóng thuộc địa toàn thế giới','Chỉ có ý nghĩa với Việt Nam','Kết thúc Chiến tranh Lạnh','Thống nhất đất nước'], ans:'Cổ vũ phong trào giải phóng thuộc địa toàn thế giới'},
+        {type:'mc', q:'Công cuộc Đổi Mới năm 1986 có nội dung cốt lõi là?', opts:['Chuyển từ kinh tế kế hoạch sang kinh tế thị trường','Mở rộng lãnh thổ','Cải cách quân đội','Thay đổi hệ thống chính trị'], ans:'Chuyển từ kinh tế kế hoạch sang kinh tế thị trường'},
+        {type:'mc', q:'Khởi nghĩa Hai Bà Trưng (40-43) có ý nghĩa gì?', opts:['Thể hiện tinh thần bất khuất, ý thức độc lập của nhân dân','Chấm dứt Bắc thuộc','Lập ra triều đại mới','Thống nhất đất nước'], ans:'Thể hiện tinh thần bất khuất, ý thức độc lập của nhân dân'},
+        {type:'mc', q:'Vì sao thời Lý - Trần được xem là thời kỳ phát triển rực rỡ?', opts:['Kinh tế, văn hóa phát triển, đánh thắng ngoại xâm','Lãnh thổ mở rộng nhất','Dân số đông nhất','Ít chiến tranh nhất'], ans:'Kinh tế, văn hóa phát triển, đánh thắng ngoại xâm'},
+        {type:'mc', q:'Cuộc cách mạng nào mở ra kỷ nguyên độc lập của Việt Nam hiện đại?', opts:['Cách mạng tháng Tám 1945','Khởi nghĩa Lam Sơn','Khởi nghĩa Tây Sơn','Cách mạng 1930'], ans:'Cách mạng tháng Tám 1945'},
+        {type:'mc', q:'Bài học lịch sử nào được rút ra từ các cuộc kháng chiến của VN?', opts:['Sức mạnh đoàn kết toàn dân là yếu tố quyết định','Vũ khí hiện đại là quan trọng nhất','Cần sự giúp đỡ từ nước ngoài','Lãnh thổ rộng mới thắng'], ans:'Sức mạnh đoàn kết toàn dân là yếu tố quyết định'},
+      ]
+    }
+  ]
+};
+</script>
+<script src="assets/game.js"></script>
+</body>
+</html>
